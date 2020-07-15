@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'ProjectManager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'projectmanager',
-        'USER': 'postgres',
-        'PASSWORD': 'J0vi_Inc_2023',
+        'NAME': 'project_manager',
+        'USER': 'task_manager',
+        'PASSWORD': 'jkz12375',
         'HOST': 'localhost',
         'PORT' : '5432',
     }
