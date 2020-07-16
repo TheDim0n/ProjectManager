@@ -1,3 +1,15 @@
-<a href="{% url 'tasks:create_status' %}">Add new task</a>
-<br>
-<a href="{% url 'tasks:status_list' %}">Список статусов</a>
+{% extends "base.html" %}
+
+{% block body %}
+{% if task_list %}
+    <ul>
+        {% for task in task_list %}
+        <li>
+            {{ task.name }}
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p> No tasks in database!</p>
+{% endif %}
+{% endblock body %}

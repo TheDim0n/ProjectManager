@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block body %}
 {% if status_list %}
     <ul>
     {% for status in status_list %}
@@ -7,3 +10,4 @@
 {% else %}
     <p>No statuses in database!</p>
 {% endif %}
+{% endblock body %}

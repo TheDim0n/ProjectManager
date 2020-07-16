@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from .models import Status
+from .models import Status, Task
 from .forms import NewStatus
 
 
 def index(request):
-    return render(request, 'tasks/index.html')
+    task_list = Task.objects.all()
+    return render(request, 'tasks/index.html', {'task_list': task_list})
 
 def status_list(request):
     __list = Status.objects.all()
