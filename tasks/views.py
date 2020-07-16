@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
 from .models import Status, Task
@@ -15,6 +15,10 @@ def status_list(request):
         'status_list': __list,
     }
     return render(request, 'tasks/statuses.html', context)
+
+def task_details(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    return render(request, 'tasks/details.html', {'task': task})
 
 def create_status(request):
     if request.method == 'POST':
