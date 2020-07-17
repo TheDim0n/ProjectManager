@@ -2,14 +2,9 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from status.models import Status
+# from projects.models import Level
 
-
-class Status(models.Model):
-
-    text = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.text
 
 
 class Task(models.Model):
@@ -19,6 +14,6 @@ class Task(models.Model):
     finish_date = models.DateField(default=timezone.now() + datetime.timedelta(days=1))
     status = models.ForeignKey(Status, on_delete=models.PROTECT, null=True)
     description = models.TextField(max_length=1000, blank=True)
-
+    # level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
     def __str__(self):
         return self.name
