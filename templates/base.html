@@ -7,13 +7,12 @@
 
 <body>
     <div class="container"> 
-        <header class="sticky-top">
-            <nav class="nav nav-masthead justify-content-center navbar-dark bg-dark">
+        <header class="sticky-top mb-2">
+            <nav class="navbar navbar-dark bg-dark justify-content-start">
                 <a class="nav-link navbar-brand" href="{% url 'start_page' %}">
                     ProjectManager
                 </a>
                 <a class="nav-link" href="{% url 'tasks:index' %}">Tasks</a>
-                <a class="nav-link" href="{% url 'status:status_list' %}">Statuses</a>
             </nav>
         </header>
 
