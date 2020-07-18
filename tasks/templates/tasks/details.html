@@ -6,4 +6,5 @@
     <div> Finish date: {{ task.finish_date }} </div>
     <div> Description: {{ task.description }} </div>
     <a class="btn btn-primary" href="{% url 'tasks:update_task' task.pk %}">Edit</a>
+    <a class="btn btn-danger" href="{% url 'tasks:delete_task' task.pk %}">Delete</a>
 {% endblock body %}

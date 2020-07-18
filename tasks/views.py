@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Task
-from .forms import NewTask
+from .forms import TaskForm
 
 def index(request):
     task_list = Task.objects.all()
@@ -14,10 +14,15 @@ def task_details(request, task_id):
 
 class TaskCreateView(CreateView):
     model = Task
-    form_class = NewTask
+    form_class = TaskForm
     template_name = 'tasks/create_task.html'
 
 class TaskUpdateView(UpdateView):
     model = Task
-    form_class = NewTask
+    form_class = TaskForm
     template_name = "tasks/update_task.html"
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = "tasks/delete_task.html"
