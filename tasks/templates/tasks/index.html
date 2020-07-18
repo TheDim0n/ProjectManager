@@ -1,15 +1,5 @@
 {% extends "base.html" %}
 
 {% block body %}
-{% if task_list %}
-    <ul>
-        {% for task in task_list %}
-        <li>
-            {{ task }}
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p> No tasks in database!</p>
-{% endif %}
+    {% include 'tasks/task_list.html' %}
 {% endblock body %}

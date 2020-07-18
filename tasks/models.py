@@ -2,9 +2,9 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+
 from status.models import Status
 # from projects.models import Level
-
 
 
 class Task(models.Model):

@@ -1,18 +1,14 @@
 {% extends "base.html" %}
 
 {% block body %}
-    {% if tasks %}
-    <div class="list-group">
-        {% for task in tasks %}
-        <a href="{% url 'tasks:task_details' task.id %}" class="list-group-item list-group-item-action">
-            <div>
-                {{ task }}
-            </div>
-            <div>
-                Finish: {{ task.finish_date }}
-            </div>
-        </a>
-        {% endfor %}
+    <div class='row'>
+        <div class='col-10'>
+            <h3>Tasks:</h3>
+        </div>
+        <div class='col-2 text-right'>
+            <a class='btn btn-success small' href={% url 'tasks:new_task' %}> Add task </a>
+        </div>
     </div>
-    {% endif %}
+
+    {% include  'tasks/task_list.html' %}
 {% endblock body %}
