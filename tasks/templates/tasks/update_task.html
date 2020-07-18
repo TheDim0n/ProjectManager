@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body%}
+<form method="POST">
+    <div class="form-group col-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Confirm</button>
+    </div>
+</form>
+{% endblock body%}

@@ -4,4 +4,6 @@
     <h3> Task: {{ task }} </h3>
     <div> Start date: {{ task.start_date }} </div>
     <div> Finish date: {{ task.finish_date }} </div>
+    <div> Description: {{ task.description }} </div>
+    <a class="btn btn-primary" href="{% url 'tasks:update_task' task.pk %}">Edit</a>
 {% endblock body %}

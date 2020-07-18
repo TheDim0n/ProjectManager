@@ -2,9 +2,9 @@
     <div class="list-group col-4">
         {% for task in tasks %}
         <a href="{% url 'tasks:task_details' task.id %}" class="list-group-item list-group-item-action">
-            <div>
+            <h4>
                 {{ task }}
-            </div>
+            </h4>
             <div>
                 Finish: {{ task.finish_date }}
             </div>

@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 from status.models import Status
 # from projects.models import Level
@@ -17,3 +18,6 @@ class Task(models.Model):
     # level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self): 
+        return reverse("tasks:task_details", args=[self.id])
