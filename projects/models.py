@@ -10,6 +10,7 @@ class Project(models.Model):
         return self.name
 
 
+
 class Level(models.Model):
     name = models.CharField(max_length=100)
     project = models.ForeignKey(Project, on_delete=models.PROTECT, null=True)
