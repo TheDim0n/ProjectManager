@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
 {% block body %}
-    {% include 'tasks/task_list.html' %}
+    <div class='row'>
+        <div class='col-10'>
+            <h3>Tasks:</h3>
+        </div>
+        <div class='col-2 text-right'>
+            <a class='btn btn-success' href={% url 'tasks:create_task' %}> Add task </a>
+        </div>
+    </div>
+
+    {% include  'tasks/task_list.html' %}
 {% endblock body %}
