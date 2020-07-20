@@ -1,7 +1,7 @@
 {% if tasks %}
     <div class="list-group col-4">
         {% for task in tasks %}
-            <a href="{% url 'tasks:task_details' task.id %}" class="list-group-item-action card card-body">
+            <a href="{% url 'tasks:task_details' task.id %}" class="list-group-item-action card card-body bg-light shadow">
                 <h4> {{ task }} </h4>
                 Finish: {{ task.finish_date }}
             </a>
