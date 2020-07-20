@@ -1,6 +1,8 @@
+from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 
+from status.models import Status
 from .models import Task
 from .forms import TaskForm
 
@@ -9,6 +11,13 @@ class TaskListView(ListView):
     model = Task
     context_object_name = 'tasks'
     template_name = 'tasks/index.html'
+    ordering = ['finish_date']
+
+    def get_context_data(self, *args, **kwargs):
+        status_list = Status.objects.all()
+        context = super(TaskListView, self).get_context_data(*args, **kwargs)
+        context['status_list'] = status_list
+        return context
 
 class TaskDetailView(DetailView):
     model = Task
@@ -28,3 +37,14 @@ class TaskUpdateView(UpdateView):
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = "tasks/delete_task.html"
+
+
+def task_status_oredered(request, status_name):
+    status = Status.objects.get(text=status_name)
+    sorted_task_list = Task.objects.filter(status=status.pk)
+    status_list = Status.objects.all()
+    context = {
+        'tasks': sorted_task_list,
+        'status_list': status_list,
+    }
+    return render(request, 'tasks/index.html', context)

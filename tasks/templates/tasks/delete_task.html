@@ -2,7 +2,7 @@
 
 {% block body%}
 <h3>Delete: {{task.name}}</h3>
-<div role='alert' class='col-2 alert alert-warning'> Confirm delete</div>
+<div role='alert' class='col-2 alert alert-warning text-center'> Confirm delete</div>
 <form method="POST">
     {% csrf_token %}
     <button class="btn btn-danger" type="submit">Delete</button>
