@@ -1,12 +1,16 @@
 {% if tasks %}
-    <div class="list-group col-4">
+<div class="container">
+    <div class="row">
         {% for task in tasks %}
-            <a href="{% url 'tasks:task_details' task.id %}" class="list-group-item-action card card-body bg-light shadow">
+        <div class="list-group col-4">
+            <a href="{% url 'tasks:task_details' task.id %}" class="list-group-item-action card card-body bg-light shadow mb-3">
                 <h4> {{ task }} </h4>
                 Finish: {{ task.finish_date }}
             </a>
+        </div>
         {% endfor %}
     </div>
+</div>
 {% else %}
     <h4>No tasks!</h4>
 {% endif %}
