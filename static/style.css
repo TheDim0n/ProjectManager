@@ -1,0 +1,7 @@
+.navbar-dark .nav-item > .nav-link.active  {
+    color:white;
+}
+
+body {
+    background: red;
+}
