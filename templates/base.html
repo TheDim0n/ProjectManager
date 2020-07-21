@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <script type="text/javascript" src={% static "script.js" %}></script>
+    <script type="text/javascript" src={% static 'script.js' %}></script>
     <title> ProjectManager </title>
 </head>
 
@@ -46,17 +46,16 @@
               </nav>
         </header>
 
-        <div class="row p-0">
-            <div class="col col-10 border-right" style="height: 100%;">
+        <div class="row p-0" style="height: 85vh;">
+            <div class="col col-10 border-right">
                 {% block body %}
                 {% endblock body %}
             </div>
 
-            <div class="col col-2 text-right">
+            <div class="col col-2">
                 {% block actions %}
                 {% endblock actions %}
             </div>
-            
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
