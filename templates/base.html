@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {% load static %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>   
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <script type="text/javascript" src={% static 'script.js' %}></script>
     <title> ProjectManager </title>
@@ -11,7 +13,6 @@
 
 <body class="container p-0">
     <header class="sticky-top mb-2">
-
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="{% url 'start_page' %}">ProjectManager</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,24 +22,24 @@
                   <ul class="navbar-nav ">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'tasks:index' %}">Tasks</a>
+                            <a class="nav-link tasks" href="{% url 'tasks:index' %}">Tasks</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'projects:index' %}">Projects</a>
+                            <a class="nav-link projects" href="{% url 'projects:index' %}">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+                            <a class="nav-link out" href="{% url 'logout' %}">Sign out</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="#">{{ user.username }}</a>
+                            <a class="nav-link user" href="#">{{ user.username }}</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+                            <a class="nav-link login" href="{% url 'login' %}">Sign in</a>
                         </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:register' %}">Sign up</a>
+                        <a class="nav-link register" href="{% url 'users:register' %}">Sign up</a>
                     </li>
                 {% endif %}
                 </ul>
