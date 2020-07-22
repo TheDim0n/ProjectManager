@@ -13,7 +13,11 @@ class Task(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField(default=timezone.now())
     finish_date = models.DateField(default=timezone.now() + datetime.timedelta(days=1))
-    status = models.ForeignKey(Status, on_delete=models.PROTECT, default=Status.objects.get(text='No status'))
+    status = models.ForeignKey(
+        Status,
+        on_delete=models.PROTECT,
+        default=Status.objects.get_or_create(text="No status"),
+    )
     description = models.TextField(max_length=1000, blank=True)
     # level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True)
 
