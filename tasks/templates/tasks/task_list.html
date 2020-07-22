@@ -2,12 +2,9 @@
 <div class="container">
     <div class="row">
         {% for task in tasks %}
-        <div class="list-group col-4">
-            <a href="{% url 'tasks:task_details' task.id %}" class="list-group-item-action card card-body bg-light shadow mb-3">
-                <h4> {{ task }} </h4>
-                Finish: {{ task.finish_date }}
-            </a>
-        </div>
+            <div class="card-group col-4 pl-0 pb-3">
+                {% include "tasks/task_card.html" %}
+            </div>
         {% endfor %}
     </div>
 </div>

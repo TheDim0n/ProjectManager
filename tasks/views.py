@@ -38,7 +38,7 @@ class TaskDeleteView(DeleteView):
     template_name = "tasks/delete_task.html"
 
 
-def task_status_oredered(request, status_name):
+def task_status_ordered(request, status_name):
     status = Status.objects.get(text=status_name)
     sorted_task_list = Task.objects.filter(status=status.pk)
     status_list = Status.objects.all()

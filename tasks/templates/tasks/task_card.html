@@ -1,0 +1,24 @@
+<a href="{% url 'tasks:task_details'  task.id %}" class="card list-group-item-action shadow">
+    <div class="card-header py-0" style="background: {{task.status.color}};">
+        {{ task.status }}
+    </div>
+    <div class="card-body">
+        <h3> {{ task }} </h3>
+        {% if task.description %}
+            {{ task.description }}
+        {% else %}
+            No description.
+        {% endif %}
+        
+    </div>
+    <div class="card-footer py-0">
+        <div class="row">
+            <div class="col">
+                Finish: {{ task.finish_date }}
+            </div>
+            <div class="col-4 text-center border-left">
+                <b> {{ forloop.counter }} </b>
+            </div>                 
+        </div>
+    </div>
+</a>
