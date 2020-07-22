@@ -1,3 +1,7 @@
 .navbar-dark .nav-item > .nav-link.active  {
-    color:rgb(255, 0, 0);
+    color:rgb(255, 255, 255);
+    border-bottom-color: #ffffff; /* Цвет линии сверху */
+    border-bottom-style: solid; /* Стиль линии сверху */
+    border-left-width: 5px;
+    padding-bottom: 5px;
 }
