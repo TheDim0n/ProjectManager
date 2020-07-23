@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 
@@ -19,6 +20,8 @@ class Task(models.Model):
     )
     description = models.TextField(max_length=1000, blank=True)
     level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True, blank=True, editable=False)
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT)
+
 
     def __str__(self):
         return self.name

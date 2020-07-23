@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
@@ -14,19 +15,27 @@ class TaskListView(ListView):
     ordering = ['finish_date']
 
     def get_context_data(self, *args, **kwargs):
+        tasks = []
+        if self.request.user.is_authenticated:
+            tasks = Task.objects.filter(created_by=self.request.user)
         status_list = Status.objects.all()
         context = super(TaskListView, self).get_context_data(*args, **kwargs)
         context['status_list'] = status_list
+        context['tasks'] = tasks
         return context
 
 class TaskDetailView(DetailView):
     model = Task
     template_name = 'tasks/details.html'
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks/create_task.html'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
 class TaskUpdateView(UpdateView):
     model = Task
