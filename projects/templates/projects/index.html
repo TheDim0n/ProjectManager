@@ -3,3 +3,20 @@
 {% block body %}
     {% include 'projects/projects_list.html' %}
 {% endblock body %}
+
+{% block actions %}
+    <div class="btn-group-vertical btn-block">
+        <a class="btn btn-success" href={% url 'projects:create_project' %}> Add project </a>
+        <div class="btn-group" role="group">
+            <button id="StatusDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Statuses
+            </button>
+            <!-- <div class="dropdown-menu" aria-labelledby="StatusDrop">
+                <a class="dropdown-item" href="{% url 'tasks:index' %}"> All </a>
+                {% for status in status_list %}
+                    <a class="dropdown-item" href="{% url 'tasks:status_order' status %}"> {{ status }} </a>
+                {% endfor %}
+            </div> -->
+        </div>
+    </div>
+{% endblock actions %}

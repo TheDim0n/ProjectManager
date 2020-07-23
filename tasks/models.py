@@ -18,7 +18,7 @@ class Task(models.Model):
         default=Status.objects.get_or_create(text="No status")[0].id,
     )
     description = models.TextField(max_length=1000, blank=True)
-    level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True, blank = True, editable = False)
+    level = models.ForeignKey(Level, on_delete=models.PROTECT, null=True, blank=True, editable=False)
 
     def __str__(self):
         return self.name
