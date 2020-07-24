@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from status.models import Status
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Project(models.Model):
@@ -15,9 +16,12 @@ class Project(models.Model):
         default=Status.objects.get_or_create(text="No status")[0].id,
     )
     description = models.TextField(max_length=1000, blank=True)
+    
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("projects:project_details", args=[self.id])
 
 class Level(models.Model):
     name = models.CharField(max_length=100)

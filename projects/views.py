@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404
@@ -44,4 +45,13 @@ def project_details(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     return render(request, 'projects/details.html', {'project': project})
 
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/users/register'
+    model = Project
+    form_class = ProjectForm
+    template_name = "projects/update_project.html"
+
+class ProjectDeleteView(DeleteView):
+    model = Project
+    template_name = "tasks/delete_project.html"
     

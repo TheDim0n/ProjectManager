@@ -3,15 +3,23 @@
 {% block body %}
     <div>
         <h3>
-            Progect: {{ project }} 
+            Project: {{ project }} 
             <span class="text-muted"> | {{ project.status }} </span>
         </h3>
-        <!-- <span class="h5">Start date:</span> {{ task.start_date}}
-        <span class="h5"> Finish date:</span> {{ task.finish_date}} -->
+        <span class="h5">Start date:</span> {{ project.start_date}}
+        <span class="h5"> Finish date:</span> {{ project.finish_date}}
     </div>
-    <!-- <div class="lead">
-        {{ task.description }}
-    </div> -->
-    
+    <div class="lead">
+        {{ project.description }}
+    </div>
 {% endblock body %}
 
+{% block actions %}
+        <div class="btn-group-vertical btn-block">
+            <a class="btn btn-primary" href="{% url 'projects:update_project' project.pk %}">Edit</a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+            </button>
+        </div>
+        {% include "projects/delete_project.html" %}
+{% endblock actions %}
