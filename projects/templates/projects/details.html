@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h3> Project: {{ project }} </h3>
+    <div>
+        <h3>
+            Progect: {{ project }} 
+            <span class="text-muted"> | {{ project.status }} </span>
+        </h3>
+        <!-- <span class="h5">Start date:</span> {{ task.start_date}}
+        <span class="h5"> Finish date:</span> {{ task.finish_date}} -->
+    </div>
+    <!-- <div class="lead">
+        {{ task.description }}
+    </div> -->
+    
 {% endblock body %}
+

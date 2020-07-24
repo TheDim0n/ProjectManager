@@ -11,7 +11,7 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter task Title',
+                'placeholder': 'Enter project title',
             }),
             'start_date': forms.DateInput(attrs={
                 'class': 'form-control',
@@ -26,6 +26,6 @@ class TaskForm(forms.ModelForm):
             }),
             'description': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter what to do in this task',
+                'placeholder': 'Enter what to do in this project',
             }),
         }
