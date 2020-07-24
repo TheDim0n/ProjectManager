@@ -54,10 +54,13 @@
             {% endblock body %}
         </div>
 
-        <div class="col col-2">
-            {% block actions %}
-            {% endblock actions %}
-        </div>
+        {% if user.is_authenticated %}
+            <div class="col col-2">
+                {% block actions %}
+                {% endblock actions %}
+            </div>
+        {% endif %}
+        
     </div>   
 </body>
 </html>

@@ -1,29 +1,33 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <div>
-        <h3>
-            Task: {{ task }} 
-            <span class="text-muted"> | {{ task.status }} </span>
-        </h3>
-        <span class="h5">Start date:</span> {{ task.start_date}}
-        <span class="h5"> Finish date:</span> {{ task.finish_date}}
-    </div>
-    <div class="lead">
-        {{ task.description }}
-    </div>
-    
+    {% if  user.pk == task.created_by.pk %}
+        <div>
+            <h3>
+                Task: {{ task }} 
+                <span class="text-muted"> | {{ task.status }} </span>
+            </h3>
+            <span class="h5">Start date:</span> {{ task.start_date}}
+            <span class="h5"> Finish date:</span> {{ task.finish_date}}
+        </div>
+        <div class="lead">
+            {{ task.description }}
+        </div>
+    {% else %}
+        <div class="alert alert-danger"> You don't have permissions for view, change and delete this task! </div>
+    {% endif %}
 {% endblock body %}
 
 {% block actions %}
-    <div class="btn-group-vertical btn-block">
-        <a class="btn btn-primary" href="{% url 'tasks:update_task' task.pk %}">Edit</a>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-            Delete
-        </button>
-    </div>
-    <!--deleteModal -->
-    {% include "tasks/delete_task.html" %}
+    {% if  user.pk == task.created_by.pk %}
+        <div class="btn-group-vertical btn-block">
+            <a class="btn btn-primary" href="{% url 'tasks:update_task' task.pk %}">Edit</a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+            </button>
+        </div>
+        <!--deleteModal -->
+        {% include "tasks/delete_task.html" %}
+    {% endif %}
 {% endblock actions %}
-

@@ -1,19 +1,23 @@
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel"> Delete {{ task }}</h5>
-      </div>
-      <div class="modal-body alert-warning">
+{% if  user.pk == task.created_by.pk %}
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel"> Delete {{ task }}</h5>
+        </div>
+        <div class="modal-body alert-warning">
             Please, confirm delete.
-      </div>
-      <div class="modal-footer">
-        <form action="{% url 'tasks:delete_task' task.pk %}" method="POST">
-            {% csrf_token %}
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button class="btn btn-danger" type="submit">Delete</button>
-        </form>
+        </div>
+        <div class="modal-footer">
+            <form action="{% url 'tasks:delete_task' task.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+{% else %}
+    <meta http-equiv="REFRESH" content="0;url={% url 'start_page' %}">
+{% endif %}

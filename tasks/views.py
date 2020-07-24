@@ -29,6 +29,7 @@ class TaskDetailView(DetailView):
     template_name = 'tasks/details.html'
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/users/register'
     model = Task
     form_class = TaskForm
     template_name = 'tasks/create_task.html'
@@ -37,7 +38,8 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/users/register'
     model = Task
     form_class = TaskForm
     template_name = "tasks/update_task.html"
@@ -48,8 +50,11 @@ class TaskDeleteView(DeleteView):
 
 
 def task_status_ordered(request, status_name):
-    status = Status.objects.get(text=status_name)
-    sorted_task_list = Task.objects.filter(status=status.pk)
+    if request.user.is_authenticated:
+        status = Status.objects.get(text=status_name)
+        sorted_task_list = Task.objects.filter(created_by=request.user, status=status.pk)
+    else:
+        sorted_task_list = []
     status_list = Status.objects.all()
     context = {
         'tasks': sorted_task_list,
