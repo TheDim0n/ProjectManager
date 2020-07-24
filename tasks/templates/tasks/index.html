@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h3>Tasks:</h3>
     {% include  'tasks/task_list.html' %}
 {% endblock body %}
 
 {% block actions %}
-    <div class="btn-group-vertical btn-block">
+    <div class="btn-group-vertical w-100">
         <a class="btn btn-success" href={% url 'tasks:create_task' %}> Add task </a>
         <div class="btn-group" role="group">
             <button id="StatusDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

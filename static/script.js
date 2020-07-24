@@ -6,7 +6,3 @@ $(document).ready(function(){
     console.log(b);
     if(b) $("." + b).addClass('active');
 });
-
-
-
-

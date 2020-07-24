@@ -12,55 +12,63 @@
     <title> ProjectManager </title>
 </head>
 
-<body class="container p-0">
-    <header class="sticky-top mb-2">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{% url 'start_page' %}">ProjectManager</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarNav">
-                  <ul class="navbar-nav ">
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link tasks" href="{% url 'tasks:index' %}">Tasks</a>
-                        </li>
+<body class="container-fluid">
+    <header class="sticky-top mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom px-0">
+            <a class="navbar-brand col-2 mx-0" href="{% url 'start_page' %}">ProjectManager</a>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse col-8 px-0" id="navbarNav">
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link projects" href="{% url 'projects:index' %}">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link out" href="{% url 'logout' %}">Sign out</a>
+                            <a class="nav-link tasks" href="{% url 'tasks:index' %}">Tasks</a>
                         </li>
-                        <li>
-                            <a class="nav-link user" href="#">{{ user.username }}</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link login" href="{% url 'login' %}">Sign in</a>
-                        </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link register" href="{% url 'users:register' %}">Sign up</a>
-                    </li>
+                    </ul>
                 {% endif %}
-                </ul>
             </div>
-            </nav>
+            
+            <div class='col-2 navbar-nav justify-content-end border-left border-secondary'>
+                {% if user.is_authenticated %}
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> {{ user.username }} </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Edit profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Sign out</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'login' %}">Sign in</a>
+                        </li>
+                        <li class="nav-item border rounded-lg bg-transparent">
+                            <a class="nav-link text-white" href="{% url 'users:register' %}">Sign up</a>
+                        </li>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
     </header>
 
-    <div class="row p-0" style="height: 85vh;">
-        <div class="col col-10 border-right">
+    <div class="row mx-0" style="height: 80vh;">
+        <div class="col col-10 mr-0 p-0">
             {% block body %}
             {% endblock body %}
         </div>
 
         {% if user.is_authenticated %}
-            <div class="col col-2">
+            <div class="col col-2 text-right pr-0 border-left">
                 {% block actions %}
                 {% endblock actions %}
             </div>
         {% endif %}
-        
     </div>   
 </body>
 </html>
