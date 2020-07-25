@@ -1,11 +1,23 @@
 {% extends "base.html" %}
 
-{% block body%}
-<form method="POST">
-    <div class="form-group col-4">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Sign in</button>
+{% block content %}
+    <div class="row justify-content-center text-center mt-2 p-3">
+        <h4> Sign in <span class="font-weight-light">to ProjectManager </span> </h4>
     </div>
-</form>
-{% endblock body%}
+
+    <div class="row justify-content-center text-center align-items-center mt-2">
+        <div class="col-3 card p-3 shadow">
+            <form class="needs-validation" novalidate method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control form-conrol-sm" name="username", placeholder="username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control form-conrol-sm" name="password", placeholder="password">
+                </div>
+                <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+            
+        </div>
+    </div>
+{% endblock content %}

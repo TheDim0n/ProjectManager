@@ -9,10 +9,12 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <script type="text/javascript" src={% static 'script.js' %}></script>
+    <script type="text/javascript" src={% static 'valid_forms.js' %}></script>
+
     <title> ProjectManager </title>
 </head>
 
-<body class="container-fluid">
+<body class="container">
     <header class="sticky-top mb-3">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom px-0">
             <a class="navbar-brand col-2 mx-0" href="{% url 'start_page' %}">ProjectManager</a>
@@ -57,18 +59,20 @@
         </nav>
     </header>
 
-    <div class="row mx-0" style="height: 80vh;">
-        <div class="col col-10 mr-0 p-0">
-            {% block body %}
-            {% endblock body %}
-        </div>
-
-        {% if user.is_authenticated %}
-            <div class="col col-2 text-right pr-0 border-left">
-                {% block actions %}
-                {% endblock actions %}
+    {% block content %}
+        <div class="row mx-0" style="height: 80vh;">
+            <div class="col col-10 mr-0 p-0">
+                {% block body %}
+                {% endblock body %}
             </div>
-        {% endif %}
-    </div>   
+
+            {% if user.is_authenticated %}
+                <div class="col col-2 text-right pr-0 border-left">
+                    {% block actions %}
+                    {% endblock actions %}
+                </div>
+            {% endif %}
+        </div>
+    {% endblock content %}
 </body>
 </html>

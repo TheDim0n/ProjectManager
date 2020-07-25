@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
     var a = window.location.href 
     $('.navbar-nav .nav-link').removeClass('active');
     var b = (a).split("/")[3];

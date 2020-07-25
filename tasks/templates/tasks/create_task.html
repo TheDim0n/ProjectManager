@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block body%}
-<form method="POST">
-    <div class="form-group col-4">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Create new task</button>
-    </div>
-</form>
-{% endblock body%}
+{% block body %}
+    <form class="needs-validation" novalidate method="POST">
+        <div class="form-group col-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">Create new task</button>
+        </div>
+    </form>
+{% endblock body %}

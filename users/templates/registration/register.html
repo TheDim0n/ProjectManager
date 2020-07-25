@@ -1,11 +1,26 @@
 {% extends "base.html" %}
+
 <h2>Sign up</h2>
-{% block body%}
-<form method="POST">
-    <div>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Sign up</button>
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-4">
+        <h3 class="text-center my-4">Register account</h3>
+        <form class='needs-validation' novalidate method="POST">      
+            {% csrf_token %}
+            <div class="form-row">
+                {% for field in form %}
+                    <div class="col-6">
+                        <label class="col-form-label">{{field.label}}*:</label>
+                    {{field}}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <button class="btn btn-success mt-3 w-25 font-weight-bold" type="submit">Sign up</button>
+            </div>
+            
+        </form>
     </div>
-</form>
-{% endblock body%}
+</div>
+{% endblock content %}

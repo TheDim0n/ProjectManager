@@ -34,6 +34,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskForm
     template_name = 'tasks/create_task.html'
 
+
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)

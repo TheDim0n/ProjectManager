@@ -2,7 +2,7 @@
 
 {% block body%}
     {% if user.pk == task.created_by.pk %}
-        <form method="POST">
+        <form class="needs-validation" novalidate method="POST">
             <div class="form-group col-4">
                 {% csrf_token %}
                 {{ form.as_p }}
