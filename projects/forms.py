@@ -2,7 +2,6 @@ from django import forms
 
 from .models import Project, Level
 
-
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
@@ -11,7 +10,7 @@ class ProjectForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter task Title',
+                'placeholder': 'Enter project Title',
             }),
             'start_date': forms.DateInput(attrs={
                 'class': 'form-control',
@@ -26,7 +25,35 @@ class ProjectForm(forms.ModelForm):
             }),
             'description': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter what to do in this task',
+                'placeholder': 'Enter what to do in this project',
+            }),
+
+        }
+        
+class LevelForm(forms.ModelForm):
+    class Meta:
+        model = Level
+        fields = ['name', 'start_date', 'finish_date', 'status', 'description']
+
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter stage Title',
+            }),
+            'start_date': forms.DateInput(attrs={
+                'class': 'form-control',
+                'type': 'date',
+            }),
+            'finish_date': forms.DateInput(attrs={
+                'class': 'form-control',
+                'type': 'date',
+            }),
+            'status': forms.Select(attrs={
+                'class': 'form-control',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter what to do on this stage',
             }),
 
         }

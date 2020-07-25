@@ -25,6 +25,8 @@ class Project(models.Model):
 
 class Level(models.Model):
     name = models.CharField(max_length=100)
+    start_date = models.DateField(default=timezone.now())
+    finish_date = models.DateField(default=timezone.now() + datetime.timedelta(days=1))
     project = models.ForeignKey(Project, on_delete=models.PROTECT, null=True)
     status = models.ForeignKey(
         Status,
@@ -33,3 +35,4 @@ class Level(models.Model):
     )
     def __str__(self):
         return self.name
+    description = models.TextField(max_length=1000, blank=True)

@@ -1,12 +1,16 @@
+import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
+from django.utils import timezone, dateformat
 
 from status.models import Status
+from tasks.forms import TaskForm
 from .models import Project
-from .forms import ProjectForm
+from .forms import ProjectForm, LevelForm
 
 
 class ProjectCreateView(CreateView):
@@ -41,9 +45,16 @@ def projects_status_ordered(request, status_name):
     }
     return render(request, 'projects/index.html', context)
 
-def project_details(request, project_id):
-    project = get_object_or_404(Project, pk=project_id)
-    return render(request, 'projects/details.html', {'project': project})
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = 'projects/details.html'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        context['task_form'] = TaskForm
+        context['level_form'] = LevelForm
+        return context
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/users/register'
