@@ -12,6 +12,10 @@
     <div class="lead">
         {{ project.description }}
     </div>
+    {% for level in project.levels.all %}
+        {% include "projects/level_card.html" %}
+        
+    {% endfor %}
 {% endblock body %}
 
 {% block actions %}
@@ -28,6 +32,6 @@
             </button>
         </div>
         {% include "projects/delete_project.html" %}
-        {% include "projects/create_task.html" %}
+        
         {% include "projects/create_level.html" %}
 {% endblock actions %}

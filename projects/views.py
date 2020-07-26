@@ -8,9 +8,30 @@ from django.views.generic import DetailView, ListView
 from django.utils import timezone, dateformat
 
 from status.models import Status
+from tasks.models import Task
 from tasks.forms import TaskForm
-from .models import Project
+from .models import Project, Level
 from .forms import ProjectForm, LevelForm
+
+
+class ProjectTaskCreateView(CreateView):
+    model = Task
+    form_class = TaskForm
+    template_name = 'projects/create_task.html'
+
+    def form_valid(self, form):
+        form.instance.level_id = self.kwargs['lpk']
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+class ProjectLevelCreateView(CreateView):
+    model = Level
+    form_class = LevelForm
+    template_name = 'projects/create_level.html'
+
+    def form_valid(self, form):
+        form.instance.project_id = self.kwargs['pk']
+        return super().form_valid(form)
 
 
 class ProjectCreateView(CreateView):
@@ -66,3 +87,24 @@ class ProjectDeleteView(DeleteView):
     model = Project
     template_name = "tasks/delete_project.html"
     
+
+class TestDetailView(ListView):
+    model = Project
+    template_name = "projects/test_base.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        context['a'] = 5
+        return context
+
+# class LevelsDetailView(ListView):
+#     model = Level
+#     form_class = LevelForm
+#     template_name = "projects/levels.html"
+
+    # def get_context_data(self, **kwargs):
+    #     # Call the base implementation first to get a context
+    #     context = super().get_context_data(**kwargs)
+    #     context['a'] = 5
+    #     return context

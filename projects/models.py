@@ -27,7 +27,7 @@ class Level(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField(default=timezone.now())
     finish_date = models.DateField(default=timezone.now() + datetime.timedelta(days=1))
-    project = models.ForeignKey(Project, on_delete=models.PROTECT, null=True)
+    project = models.ForeignKey(Project, related_name="levels" , on_delete=models.PROTECT, null=True)
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,

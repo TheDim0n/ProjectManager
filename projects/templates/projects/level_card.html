@@ -1,0 +1,29 @@
+{% with a=level.id|stringformat:"i" %}
+<a data-toggle="modal" data-target={{"#taskModalP"|add:a}}  class="card list-group-item-action shadow">
+    <div class="card-header py-0" style="background: {{level.status.color}};">
+        {{ level.status }} {{ level.id }}
+    </div>
+    <div class="card-body">
+        <h3> {{ level }} </h3>
+        
+        
+        {% if level.description %}
+            {{ level.description }}
+        {% else %}
+            No description.
+        {% endif %}
+        
+    </div>
+    <div class="card-footer py-0">
+        <div class="row">
+            <div class="col">
+                Finish: {{ level.finish_date }}
+            </div>
+            <div class="col-4 text-center border-left">
+                <b> {{ forloop.counter }} </b>
+            </div>                 
+        </div>
+    </div>
+</a>
+{% include 'projects/create_task.html' %}
+{% endwith %}

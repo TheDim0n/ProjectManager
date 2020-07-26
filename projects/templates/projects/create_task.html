@@ -1,9 +1,9 @@
-<div class="modal fade" id="taskModalP" tabindex="-  1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <form method="POST"></form>
+<div class="modal fade" id={{"taskModalP"|add:a}} tabindex="-  1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <form method="POST" class="needs-validation" novalidate action="{% url 'projects:create_task' project.pk level.pk%}">
         <div class="modal-dialog  modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel"> Add task to {{ project }}</h5>
+                    <h5 class="modal-title" id="deleteModalLabel"> Add task to level {{ level.id }}</h5>
                 </div>
                 <div class="modal-body text-left">
                     {% csrf_token %}
