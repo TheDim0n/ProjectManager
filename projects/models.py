@@ -23,16 +23,28 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse("projects:project_details", args=[self.id])
 
+
+class LevelManager(models.Manager):
+    def create_zero_level(self, project_id):
+        level = self.create(project=project_id)
+        return level
+
+
 class Level(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, default="Zero")
     start_date = models.DateField(default=timezone.now())
     finish_date = models.DateField(default=timezone.now() + datetime.timedelta(days=1))
-    project = models.ForeignKey(Project, related_name="levels" , on_delete=models.PROTECT, null=True)
+    project = models.ForeignKey(Project, related_name="levels", on_delete=models.PROTECT, null=True)
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
         default=Status.objects.get_or_create(text="No status")[0].id,
     )
+    is_zero = models.BooleanField(default=False)
     def __str__(self):
         return self.name
     description = models.TextField(max_length=1000, blank=True)
+
+    objects = LevelManager()
+
+

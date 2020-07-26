@@ -1,5 +1,6 @@
 import datetime
 
+from django.http.response import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -38,6 +39,11 @@ class ProjectCreateView(CreateView):
     model = Project
     form_class = ProjectForm
     template_name = 'projects/create_project.html'
+    def form_valid(self, form):
+        self.object = form.save()
+        zero_level = Level.objects.create_zero_level(self.object)
+        zero_level.save()
+        return HttpResponseRedirect(self.object.get_absolute_url())
 
 class ProjectListView(ListView):
     model = Project
