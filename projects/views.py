@@ -7,6 +7,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.utils import timezone, dateformat
+from django.urls import reverse
+
 
 from status.models import Status
 from tasks.models import Task
@@ -29,10 +31,12 @@ class ProjectLevelCreateView(CreateView):
     model = Level
     form_class = LevelForm
     template_name = 'projects/create_level.html'
-
     def form_valid(self, form):
         form.instance.project_id = self.kwargs['pk']
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('projects:project_details', args=(self.kwargs['pk'],))
 
 
 class ProjectCreateView(CreateView):

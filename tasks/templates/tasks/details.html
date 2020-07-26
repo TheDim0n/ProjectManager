@@ -4,8 +4,7 @@
     {% if  user.pk == task.created_by.pk %}
         <div>
             <h3>
-                Task: {{ task }} 
-                <span class="text-muted"> | {{ task.status }} </span>
+                {{ task }} <span class="badge" style="background: {{task.status.color}}"> {{ task.status }} </span>
             </h3>
             <span class="h5">Start date:</span> {{ task.start_date}}
             <span class="h5"> Finish date:</span> {{ task.finish_date}}

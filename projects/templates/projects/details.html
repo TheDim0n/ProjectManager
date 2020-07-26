@@ -3,8 +3,7 @@
 {% block body %}
     <div>
         <h3>
-            Project: {{ project }} 
-            <span class="text-muted"> | {{ project.status }} </span>
+            {{ project }} <span class="badge" style="background: {{project.status.color}};"> {{ project.status }} </span>
         </h3>
         <span class="h5">Start date:</span> {{ project.start_date}}
         <span class="h5"> Finish date:</span> {{ project.finish_date}}
@@ -12,10 +11,13 @@
     <div class="lead">
         {{ project.description }}
     </div>
-    {% for level in project.levels.all %}
-        {% include "projects/level_card.html" %}
-        
-    {% endfor %}
+    <div class="accordion p-3 mr-3 mt-3 border" id="accordionExample">
+        <button type="button" class="btn btn-light btn-sm p-1 m-1"> <span class="badge badge-success">+</span> Add task</button>
+        <button type="button" class="btn btn-light btn-sm p-1 m-1"  data-toggle="modal" data-target="#stageModalP"> <span class="badge badge-success">+</span> Add stage</button>
+        {% for level in project.levels.all %}
+            {% include "projects/level_card.html" %} 
+        {% endfor %}
+</div>
 {% endblock body %}
 
 {% block actions %}
@@ -26,9 +28,6 @@
             </button>
             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#taskModalP">
                 Add task
-            </button>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#stageModalP">
-                Add stage
             </button>
         </div>
         {% include "projects/delete_project.html" %}
