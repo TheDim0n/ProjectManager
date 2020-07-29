@@ -33,6 +33,7 @@ class ProjectLevelCreateView(CreateView):
     template_name = 'projects/create_level.html'
     def form_valid(self, form):
         form.instance.project_id = self.kwargs['pk']
+        form.instance.level_id = self.kwargs['lpk']
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -83,6 +84,7 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
+        context['zero_level'] = Level.objects.get_zero(self.object)
         context['task_form'] = TaskForm
         context['level_form'] = LevelForm
         return context

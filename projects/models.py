@@ -26,8 +26,12 @@ class Project(models.Model):
 
 class LevelManager(models.Manager):
     def create_zero_level(self, project_id):
-        level = self.create(project=project_id)
+        level = self.create(project=project_id, is_zero=True)
         return level
+    
+    def get_zero(self, id):
+        return super().get(is_zero=True, project = id)
+
 
 
 class Level(models.Model):
@@ -40,7 +44,9 @@ class Level(models.Model):
         on_delete=models.PROTECT,
         default=Status.objects.get_or_create(text="No status")[0].id,
     )
-    is_zero = models.BooleanField(default=False)
+    is_zero = models.BooleanField(default=False, blank=True)
+    root_level = models.ForeignKey("self", related_name="levels", on_delete=models.PROTECT, null=True)
+
     def __str__(self):
         return self.name
     description = models.TextField(max_length=1000, blank=True)
