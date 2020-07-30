@@ -28,3 +28,13 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         return reverse("tasks:task_details", args=[self.id])
+
+    def was_expired(self):
+        if self.finish_date < timezone.now().date() and self.status != Status.objects.get(text="Done"):
+            self.status = Status.objects.get_or_create(
+                text="Expired",
+                defaults={"color": "#D10000"}
+            )[0]
+            self.save()
+            return True
+        return False
