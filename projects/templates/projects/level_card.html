@@ -1,5 +1,5 @@
 {% with a=level.id|stringformat:"i" %}
-<div class="card border">
+<div class="card border" style="margin-bottom: 1px;">
     <div class="card-header" id={{"heading"|add:a}}>
       <h5 class="mb-0">
         <button class="btn btn-link col-12" type="button">
@@ -34,8 +34,16 @@
       </h5>
     </div>
     <div id={{"collapse"|add:a}} class="collapse multi-collapse" aria-labelledby={{"heading"|add:a}}>
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        <div class="card-body p-0 border-left border-dark" style="margin-left: 30px;">
+          {% for level in level.levels.all %}
+            {% with template_name="projects/level_card.html" %}
+              {% include template_name %}
+            {% endwith %}
+          {% endfor %}
+
+          {% for task in level.tasks.all %}
+            {% include "projects/task_card.html" %} 
+          {% endfor %}
         </div>
     </div>
 </div>

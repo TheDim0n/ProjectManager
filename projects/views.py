@@ -27,13 +27,16 @@ class ProjectTaskCreateView(CreateView):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse('projects:project_details', args=(self.kwargs['pk'],))
+
 class ProjectLevelCreateView(CreateView):
     model = Level
     form_class = LevelForm
     template_name = 'projects/create_level.html'
     def form_valid(self, form):
         form.instance.project_id = self.kwargs['pk']
-        form.instance.level_id = self.kwargs['lpk']
+        form.instance.root_level_id = self.kwargs['lpk']
         return super().form_valid(form)
 
     def get_success_url(self):
