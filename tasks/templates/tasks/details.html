@@ -4,7 +4,7 @@
     {% if  user.pk == task.created_by.pk %}
         <div>
             <h3>
-                {{ task }} <span class="badge" style="background: {{task.status.color}}"> {{ task.status }} </span> {{ task.was_expired }}
+                {{ task }} <span class="badge" style="background: {{task.status.color}}"> {{ task.status }} </span>
             </h3>
             <span class="h5">Start date:</span> {{ task.start_date}}
             <span class="h5"> Finish date:</span> {{ task.finish_date}}
@@ -13,7 +13,7 @@
             {{ task.description }}
         </div>
     {% else %}
-        <div class="alert alert-danger"> You don't have permissions for view, change and delete this task! </div>
+        <div class="alert alert-danger mr-1"> You don't have permissions for view, change and delete this task! </div>
     {% endif %}
 {% endblock body %}
 

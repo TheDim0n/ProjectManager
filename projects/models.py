@@ -1,9 +1,12 @@
 import datetime
 
 from django.db import models
-from status.models import Status
-from django.utils import timezone
 from django.urls import reverse
+from django.utils import timezone
+from django.contrib.auth.models import User
+
+from status.models import Status
+
 
 
 class Project(models.Model):
@@ -16,6 +19,7 @@ class Project(models.Model):
         default=Status.objects.get_or_create(text="No status")[0].id,
     )
     description = models.TextField(max_length=1000, blank=True)
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -25,8 +29,8 @@ class Project(models.Model):
 
 
 class LevelManager(models.Manager):
-    def create_zero_level(self, project_id):
-        level = self.create(project=project_id, is_zero=True)
+    def create_zero_level(self, project_id, user_id):
+        level = self.create(project=project_id, is_zero=True, created_by=user_id)
         return level
 
     def get_zero(self, project_id):
@@ -46,11 +50,10 @@ class Level(models.Model):
     )
     is_zero = models.BooleanField(default=False, blank=True)
     root_level = models.ForeignKey("self", related_name="levels", on_delete=models.PROTECT, null=True)
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
     description = models.TextField(max_length=1000, blank=True)
 
     objects = LevelManager()
-
-

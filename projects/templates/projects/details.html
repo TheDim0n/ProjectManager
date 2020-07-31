@@ -1,20 +1,25 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <div>
-        <h3>
-            {{ project }} <span class="badge" style="background: {{project.status.color}};"> {{ project.status }} </span>
-        </h3>
-        <span class="h5">Start date:</span> {{ project.start_date}}
-        <span class="h5"> Finish date:</span> {{ project.finish_date}}
-    </div>
-    <div class="lead">
-        {{ project.description }}
-    </div>
-{% include 'projects/zero_level.html' %}
+    {% if user.pk == project.created_by.pk %}
+        <div>
+            <h3>
+                {{ project }} <span class="badge" style="background: {{project.status.color}};"> {{ project.status }} </span>
+            </h3>
+            <span class="h5">Start date:</span> {{ project.start_date}}
+            <span class="h5"> Finish date:</span> {{ project.finish_date}}
+        </div>
+        <div class="lead">
+            {{ project.description }}
+        </div>
+        {% include 'projects/zero_level.html' %}
+    {% else %}
+        <div class="alert alert-danger mr-2"> You don't have permissions for view, change and delete this project! </div>
+    {% endif %}
 {% endblock body %}
 
 {% block actions %}
+    {% if user.pk == project.created_by.pk %}
         <div class="btn-group-vertical btn-block">
             <a class="btn btn-primary" href="{% url 'projects:update_project' project.pk %}">Edit</a>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
@@ -22,4 +27,5 @@
             </button>
         </div>
         {% include "projects/delete_project.html" %}
+    {% endif %}
 {% endblock actions %}
