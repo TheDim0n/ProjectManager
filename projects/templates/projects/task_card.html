@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
           <div class="col-9">
-            {{task}}
+            {{task}} <span class="badge badge-pills" style="background-color: {{task.status.color}};">{{task.status}} </span>
           </div>
           <div class="col-3 text-right border-left">
             <a href="">
