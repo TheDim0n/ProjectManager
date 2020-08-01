@@ -30,11 +30,13 @@ class Task(models.Model):
         return reverse("tasks:task_details", args=[self.id])
 
     def was_expired(self):
-        if self.finish_date < timezone.now().date() and self.status != Status.objects.get(text="Done"):
-            self.status = Status.objects.get_or_create(
-                text="Expired",
-                defaults={"color": "#D10000"}
-            )[0]
-            self.save()
-            return True
+        done_status = Status.objects.get(text="Done")
+        if self.status != done_status:
+            if self.finish_date < timezone.now().date():
+                self.status = Status.objects.get_or_create(
+                    text="Expired",
+                    defaults={"color": "#D10000"}
+                )[0]
+                self.save()
+                return True
         return False
