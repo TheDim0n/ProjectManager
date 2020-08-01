@@ -15,4 +15,6 @@ urlpatterns = [
     path('<int:pk>/delete_level', views.ProjectLevelDeleteView.as_view(), name='delete_level'),
     path('<int:pk>/<int:lpk>/create_level', views.ProjectLevelCreateView.as_view(), name='create_level'),
     path('<int:pk>/<int:lpk>/create_task', views.ProjectTaskCreateView.as_view(), name='create_task'),
+    path('task_details/<int:pk>', views.ProjectTaskUpdateView.as_view(), name="task_details"),
+    path('level_details/<int:pk>', views.ProjectLevelUpdateView.as_view(), name="level_details"),
 ]

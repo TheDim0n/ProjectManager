@@ -12,6 +12,11 @@ from tasks.forms import TaskForm
 from .models import Project, Level
 from .forms import ProjectForm, LevelForm
 
+class ProjectLevelUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/users/register'
+    model = Level
+    form_class = LevelForm
+    template_name = "projects/level_details.html"
 
 class ProjectLevelDeleteView(LoginRequiredMixin, DeleteView):
     model = Level
@@ -29,7 +34,7 @@ class ProjectTaskUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/users/register'
     model = Task
     form_class = TaskForm
-    template_name = "projects/update_task.html"
+    template_name = "projects/task_details.html"
 
 class ProjectTaskCreateView(LoginRequiredMixin, CreateView):
     login_url = '/users/register'
