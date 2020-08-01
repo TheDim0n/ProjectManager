@@ -13,6 +13,24 @@ from .models import Project, Level
 from .forms import ProjectForm, LevelForm
 
 
+class ProjectLevelDeleteView(LoginRequiredMixin, DeleteView):
+    model = Level
+    template_name = "projects/delete_level.html"
+    def get_success_url(self):
+        return reverse('projects:project_details', args=str(self.object.project.id))
+
+class ProjectTaskDeleteView(LoginRequiredMixin, DeleteView):
+    model = Task
+    template_name = "projects/delete_task.html"
+    def get_success_url(self):
+        return reverse('projects:project_details', args=str(self.object.level.project.id))
+
+class ProjectTaskUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = '/users/register'
+    model = Task
+    form_class = TaskForm
+    template_name = "projects/update_task.html"
+
 class ProjectTaskCreateView(LoginRequiredMixin, CreateView):
     login_url = '/users/register'
     model = Task

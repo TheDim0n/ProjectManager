@@ -42,14 +42,14 @@ class Level(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField(default=timezone.now())
     finish_date = models.DateField(default=timezone.now() + datetime.timedelta(days=1))
-    project = models.ForeignKey(Project, related_name="levels", on_delete=models.PROTECT, null=True)
+    project = models.ForeignKey(Project, related_name="levels", on_delete=models.CASCADE, null=True)
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
         default=Status.objects.get_or_create(text="No status")[0].id,
     )
     is_zero = models.BooleanField(default=False, blank=True)
-    root_level = models.ForeignKey("self", related_name="levels", on_delete=models.PROTECT, null=True)
+    root_level = models.ForeignKey("self", related_name="levels", on_delete=models.CASCADE, null=True)
     created_by = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):

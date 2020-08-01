@@ -1,14 +1,14 @@
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id={{"deleteLevelModalP"|add:a}} tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel"> Delete {{ project }}</h5>
+            <h5 class="modal-title" id="deleteModalLabel"> Delete {{ level }}</h5>
         </div>
         <div class="modal-body alert-warning text-left">
             Please, confirm delete.
         </div>
         <div class="modal-footer">
-            <form action="{% url 'projects:delete_project' project.pk %}" method="POST">
+            <form action="{% url 'projects:delete_level' level.pk %}" method="POST">
                 {% csrf_token %}
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button class="btn btn-danger" type="submit">Delete</button>
@@ -17,4 +17,3 @@
       </div>
     </div>
 </div>
-
