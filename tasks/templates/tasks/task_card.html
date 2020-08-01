@@ -3,18 +3,20 @@
         {{ task.status }}
     </div>
     <div class="card-body">
-        <h3> {{ task }} </h3>
+        <h5> {{ task }} </h5>
+        {% if task.level.project.name %}
+            <p> <b> Project: </b> {{ task.level.project.name }} </p>
+        {% endif %}
+        
         {% if task.description %}
-            {{ task.description }}
-        {% else %}
-            No description.
+            {{ task.short_description }}
         {% endif %}
         
     </div>
     <div class="card-footer py-0">
         <div class="row">
             <div class="col">
-                Finish: {{ task.finish_date }}
+                <b>Finish:</b> {{ task.finish_date }}
             </div>
             <div class="col-4 text-center border-left">
                 <b> {{ forloop.counter }} </b>

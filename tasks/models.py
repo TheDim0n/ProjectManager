@@ -22,12 +22,18 @@ class Task(models.Model):
     level = models.ForeignKey(Level, related_name="tasks", on_delete=models.CASCADE, null=True, blank=True)
     created_by = models.ForeignKey(User, on_delete=models.PROTECT)
 
-
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse("tasks:task_details", args=[self.id])
+
+    def short_description(self):
+        if self.description:
+            splited_description = self.description.split()
+            end = '...' if len(splited_description) > 10 else ''
+            return ' '.join(splited_description[:10]) + end
+        return None
 
     def was_expired(self):
         done_status = Status.objects.get(text="Done")
@@ -35,7 +41,7 @@ class Task(models.Model):
             if self.finish_date < timezone.now().date():
                 self.status = Status.objects.get_or_create(
                     text="Expired",
-                    defaults={"color": "#D10000"}
+                    defaults={"color": "#8D1616"}
                 )[0]
                 self.save()
                 return True

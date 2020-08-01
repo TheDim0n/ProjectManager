@@ -1,7 +1,18 @@
 from django import forms
 
+from projects.models import Project
+from status.models import Status
+
 from .models import Task
 
+PROJECTS = [("All", "All")]
+for item in Project.objects.all():
+    PROJECTS.append((item.name, item.name))
+
+
+STATUSES = [("All", "All")]
+for item in Status.objects.all():
+    STATUSES.append((item.text, item.text))
 
 class TaskForm(forms.ModelForm):
     class Meta:
@@ -29,3 +40,13 @@ class TaskForm(forms.ModelForm):
                 'placeholder': 'Enter what to do in this project',
             }),
         }
+
+class FilterForm(forms.Form):
+    project = forms.Field(
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=PROJECTS),
+        label="Project:",
+    )
+    status = forms.Field(
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=STATUSES),
+        label="Status:",
+    )

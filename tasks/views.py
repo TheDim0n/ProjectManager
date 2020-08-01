@@ -1,11 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 
 from status.models import Status
 from .models import Task
-from .forms import TaskForm
+from .forms import TaskForm, FilterForm
 
 
 class TaskListView(ListView):
@@ -15,13 +14,32 @@ class TaskListView(ListView):
     ordering = ['finish_date']
 
     def get_context_data(self, *args, **kwargs):
-        tasks = []
+        try:
+            project_name = self.request.GET['project']
+        except KeyError:
+            project_name = ''
+
+        try:
+            status_name = self.request.GET['status']
+        except KeyError:
+            status_name = ''
+
+        last_initial = {
+            'status': status_name,
+            'project': project_name,
+        }
+    
         if self.request.user.is_authenticated:
             tasks = Task.objects.filter(created_by=self.request.user)
+            if project_name and project_name != "All":
+                tasks = tasks.filter(level__project__name=project_name)
+            if status_name and status_name != "All":
+                tasks = tasks.filter(status__text=status_name)
         status_list = Status.objects.all()
         context = super(TaskListView, self).get_context_data(*args, **kwargs)
         context['status_list'] = status_list
         context['tasks'] = tasks
+        context['filter_form'] = FilterForm(initial=last_initial)
         return context
 
 class TaskDetailView(DetailView):
@@ -48,17 +66,3 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = "tasks/delete_task.html"
-
-
-def task_status_ordered(request, status_name):
-    if request.user.is_authenticated:
-        status = Status.objects.get(text=status_name)
-        sorted_task_list = Task.objects.filter(created_by=request.user, status=status.pk)
-    else:
-        sorted_task_list = []
-    status_list = Status.objects.all()
-    context = {
-        'tasks': sorted_task_list,
-        'status_list': status_list,
-    }
-    return render(request, 'tasks/index.html', context)
