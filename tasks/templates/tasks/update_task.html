@@ -1,16 +1,19 @@
-{% extends "base.html" %}
-
-{% block body%}
-    {% if user.pk == task.created_by.pk %}
-        <form class="needs-validation" novalidate method="POST">
-            <div class="form-group col-4">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-primary" type="submit">Confirm</button>
+<div class="modal fade" id="updateTaskModal" tabindex="-1" role="dialog" aria-labelledby="updateTaskModalLabel" aria-hidden="true">
+    <form method="POST" class="needs-validation" novalidate action="{% url 'tasks:update_task' task.pk %}">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateTaskModalLabel"> Update {{ task }}</h5>
+                </div>
+                <div class="modal-body text-left">
+                    {% csrf_token %}
+                    {{ task_form.as_p }}
+                </div>
+                <div class="modal-footer">     
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
             </div>
-        </form>
-    {% else %}
-        <div class="alert alert-danger"> You don't have permissions for view, change and delete this task! </div>
-    {% endif %}
-    
-{% endblock body%}
+        </div>
+    </form> 
+</div>

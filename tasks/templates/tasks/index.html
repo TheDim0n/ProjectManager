@@ -6,8 +6,9 @@
 
 {% block actions %}
     <div class="btn-group-vertical w-100">
-        <a class="btn btn-sm btn-success w-100" href={% url 'tasks:create_task' %}> Add task </a>
+        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#AddTaskModal"> Add task </button>
     </div>
+    {% include 'tasks/create_task.html' %}
     <hr>
     {% include 'tasks/filter_tasks.html' %}
 {% endblock actions %}

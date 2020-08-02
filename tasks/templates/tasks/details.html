@@ -20,13 +20,16 @@
 {% block actions %}
     {% if  user.pk == task.created_by.pk %}
         <div class="btn-group-vertical btn-block">
-            <a class="btn btn-primary" href="{% url 'tasks:update_task' task.pk %}">Edit</a>
+            {% comment %} <a class="btn btn-primary" href="{% url 'tasks:update_task' task.pk %}">Edit</a> {% endcomment %}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateTaskModal">
+                Edit
+            </button>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                 Delete
             </button>
         </div>
-        <!--deleteModal -->
+        {% include 'tasks/update_task.html' %}
         {% include "tasks/delete_task.html" %}
     {% endif %}
 {% endblock actions %}

@@ -1,4 +1,4 @@
-<div class="modal fade" id={{"taskModalP"|add:a}} tabindex="-  1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id={{"taskModalP"|add:a}} tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <form method="POST" class="needs-validation" novalidate action="{% url 'projects:create_task' project.pk level.pk%}">
         <div class="modal-dialog  modal-lg modal-dialog-scrollable">
             <div class="modal-content">
@@ -10,8 +10,8 @@
                     {{ task_form.as_p }}
                 </div>
                 <div class="modal-footer">     
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-success" type="submit">Add</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit">Add</button>
                 </div>
             </div>
         </div>

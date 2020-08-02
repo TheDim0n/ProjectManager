@@ -1,11 +1,19 @@
-{% extends 'base.html' %}
-
-{% block body %}
-    <form class="needs-validation" novalidate method="POST">
-        <div class="form-group col-4">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-primary" type="submit">Create new task</button>
+<div class="modal fade" id="AddTaskModal" tabindex="-1" role="dialog" aria-labelledby="AddTaskModalLabel" aria-hidden="true">
+    <form method="POST" class="needs-validation" novalidate action="{% url 'tasks:create_task'%}">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddTaskModalLabel"> Add task </h5>
+                </div>
+                <div class="modal-body text-left">
+                    {% csrf_token %}
+                    {{ task_form.as_p }}
+                </div>
+                <div class="modal-footer">     
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit">Add</button>
+                </div>
+            </div>
         </div>
-    </form>
-{% endblock body %}
+    </form> 
+</div>

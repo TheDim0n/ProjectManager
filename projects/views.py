@@ -21,12 +21,14 @@ class ProjectLevelUpdateView(LoginRequiredMixin, UpdateView):
 class ProjectLevelDeleteView(LoginRequiredMixin, DeleteView):
     model = Level
     template_name = "projects/delete_level.html"
+
     def get_success_url(self):
         return reverse('projects:project_details', args=str(self.object.project.id))
 
 class ProjectTaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = "projects/delete_task.html"
+
     def get_success_url(self):
         return reverse('projects:project_details', args=str(self.object.level.project.id))
 
@@ -56,6 +58,7 @@ class ProjectLevelCreateView(LoginRequiredMixin, CreateView):
     model = Level
     form_class = LevelForm
     template_name = 'projects/create_level.html'
+
     def form_valid(self, form):
         form.instance.project_id = self.kwargs['pk']
         form.instance.root_level_id = self.kwargs['lpk']

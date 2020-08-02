@@ -40,17 +40,30 @@ class TaskListView(ListView):
         context['status_list'] = status_list
         context['tasks'] = tasks
         context['filter_form'] = FilterForm(initial=last_initial)
+        context['task_form'] = TaskForm
         return context
 
 class TaskDetailView(DetailView):
     model = Task
     template_name = 'tasks/details.html'
 
+    def get_context_data(self, *args, **kwargs):
+        initial_content = {
+            'name': self.object.name,
+            'start_date': self.object.start_date,
+            'finish_date': self.object.finish_date,
+            'status': self.object.status,
+            'description': self.object.description,
+        }
+        context = super(TaskDetailView, self).get_context_data(*args, **kwargs)
+        context['task_form'] = TaskForm(initial=initial_content)
+        return context
+
 class TaskCreateView(LoginRequiredMixin, CreateView):
     login_url = '/users/register'
     model = Task
     form_class = TaskForm
-    template_name = 'tasks/create_task.html'
+    template_name = 'tasks/index.html'
 
 
     def form_valid(self, form):
