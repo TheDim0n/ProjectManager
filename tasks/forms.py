@@ -5,7 +5,7 @@ from status.models import Status
 
 from .models import Task
 
-PROJECTS = [("All", "All")]
+PROJECTS = [("All", "All"), ('---', '---')]
 for item in Project.objects.all():
     PROJECTS.append((item.name, item.name))
 
@@ -21,19 +21,19 @@ class TaskForm(forms.ModelForm):
 
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Enter project title',
             }),
             'start_date': forms.DateInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'type': 'date',
             }),
             'finish_date': forms.DateInput(attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'type': 'date',
             }),
             'status': forms.Select(attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
             }),
             'description': forms.Textarea(attrs={
                 'class': 'form-control',

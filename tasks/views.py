@@ -32,7 +32,10 @@ class TaskListView(ListView):
         if self.request.user.is_authenticated:
             tasks = Task.objects.filter(created_by=self.request.user)
             if project_name and project_name != "All":
-                tasks = tasks.filter(level__project__name=project_name)
+                if project_name == '---':
+                    tasks = tasks.filter(level=None)
+                else:
+                    tasks = tasks.filter(level__project__name=project_name)
             if status_name and status_name != "All":
                 tasks = tasks.filter(status__text=status_name)
         status_list = Status.objects.all()
