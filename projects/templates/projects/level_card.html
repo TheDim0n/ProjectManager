@@ -2,21 +2,20 @@
 <div class="card border" style="margin-bottom: 1px;">
     <div class="card-header" id={{"heading"|add:a}}>
       <h3 class="mb-0">
-        <button class="btn col-12" type="button">
+        <div class="btn col-12" type="button">
             <div class="row">
-              <div class="col-4" data-toggle="collapse" data-target={{"#collapse"|add:a}} aria-expanded="true" aria-controls={{"collapse"|add:a}}>
+              <div class="col-7" data-toggle="collapse" data-target={{"#collapse"|add:a}} aria-expanded="true" aria-controls={{"collapse"|add:a}}>
                 <p class="card-text text-left">
                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                   </svg>
-                  <strong>{{level}}</strong> <span class="badge badge-pill" style="background-color: {{level.status.color}};">{{level.status}} 
-                </span> 
-                
-              </p>
+                  <strong>{{level}}</strong>
+                  <span class="badge badge-pill" style="background-color: {{level.status.color}};">{{level.status}} </span>
+                </p>
               </div>
               
-              <div class="col-8 text-right border-left ">
-                <span class="">Finish: {{ level.finish_date }}</span>
+              <div class="col-5 text-right border-left">
+                <span>Finish: {{ level.finish_date }}</span>
                 <span class="dropdown">
                   <a id="levelDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-plus justify-content-right  text-success mr-3 ml-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +42,7 @@
                 </a> 
               </div> 
             </div>
-        </button>
+        </div>
       </h3>
     </div>
     {% if level.levels.all or level.tasks.all %}
