@@ -1,22 +1,18 @@
 <a href="{% url 'tasks:task_details'  task.id %}" class="card list-group-item-action shadow">
-    <div class="card-header py-0" style="background: {{task.status.color}};">
+    <div class="card-header py-0" style="background: {{task.status.color}}; color: {{task.status.text_color}};">
         {{ task.status }}
     </div>
     <div class="card-body">
-        <h5> {{ task }} </h5>
+        <h5><u> {{ task }} </u></h5>
         {% if task.level.project.name %}
             <p> <b> Project: </b> {{ task.level.project.name }} </p>
         {% endif %}
-        
-        {% if task.description %}
-            {{ task.short_description }}
-        {% endif %}
-        
+        {{ task.markdown_description|striptags|truncatewords:10 }}
     </div>
     <div class="card-footer py-0">
         <div class="row">
             <div class="col">
-                <b>Finish:</b> {{ task.finish_date }}
+                <b>Finish:</b> {{ task.finish_date|date:"d M. Y" }}
             </div>
             <div class="col-4 text-center border-left">
                 <b> {{ forloop.counter }} </b>

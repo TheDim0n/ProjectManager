@@ -4,15 +4,19 @@
     {% if  user.pk == task.created_by.pk %}
         <div>
             <h3>
-                {{ task }} <span class="badge" style="background: {{task.status.color}}"> {{ task.status }} </span>
+                {{ task }} 
+                <span class="badge" style="background: {{task.status.color}}; color: {{task.status.text_color}};"> {{ task.status }} </span>
+                {% if task.level.project.name %}
+                    <span class="badge badge-secondary"> {{ task.level.project.name }} </span>
+                {% endif %}
             </h3>
-            <span class="h5">Start date:</span> {{ task.start_date}}
-            <span class="h5"> Finish date:</span> {{ task.finish_date}}
+            <span class="h5">Start date:</span> {{ task.start_date|date:"d M. Y" }}
+            <span class="h5"> Finish date:</span> {{ task.finish_date|date:"d M. Y" }}
         </div>
+        <hr>
         <div class="lead">
-            {{ task.description }}
+            {{ task.markdown_description|safe }}
         </div>
-        <h5>{{task.level}}</h5>
     {% else %}
         <div class="alert alert-danger mr-1"> You don't have permissions for view, change and delete this task! </div>
     {% endif %}

@@ -1,4 +1,5 @@
 import datetime
+import markdown
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -18,7 +19,7 @@ class Task(models.Model):
         on_delete=models.PROTECT,
         default=Status.objects.get_or_create(text="No status")[0].id,
     )
-    description = models.TextField(max_length=1000, blank=True)
+    description = models.TextField(max_length=10000, blank=True)
     level = models.ForeignKey(Level, related_name="tasks", on_delete=models.CASCADE, null=True, blank=True)
     created_by = models.ForeignKey(User, on_delete=models.PROTECT)
 
@@ -27,13 +28,6 @@ class Task(models.Model):
 
     def get_absolute_url(self):
         return reverse("tasks:task_details", args=[self.id])
-
-    def short_description(self):
-        if self.description:
-            splited_description = self.description.split()
-            end = '...' if len(splited_description) > 10 else ''
-            return ' '.join(splited_description[:10]) + end
-        return None
 
     def was_expired(self):
         done_status = Status.objects.get(text="Done")
@@ -46,3 +40,6 @@ class Task(models.Model):
                 self.save()
                 return True
         return False
+
+    def markdown_description(self):
+        return markdown.markdown(self.description)

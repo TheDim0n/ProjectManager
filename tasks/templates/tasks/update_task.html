@@ -1,13 +1,45 @@
 <div class="modal fade" id="updateTaskModal" tabindex="-1" role="dialog" aria-labelledby="updateTaskModalLabel" aria-hidden="true">
     <form method="POST" class="needs-validation" novalidate action="{% url 'tasks:update_task' task.pk %}">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="updateTaskModalLabel"> Update {{ task }}</h5>
                 </div>
                 <div class="modal-body text-left">
                     {% csrf_token %}
-                    {{ task_form.as_p }}
+                    {% comment %} {{ task_form.as_p }} {% endcomment %}
+                    <div class="form-row">
+                        <div class="col-4">
+                            <label class="col-form-label">{{ task_form.name.label }}:</label>
+                            {{ task_form.name }}
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">{{ task_form.status.label }}:</label>
+                            {{ task_form.status }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <label class="col-form-label">{{ task_form.start_date.label }}:</label>
+                            {{ task_form.start_date }}
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">{{ task_form.finish_date.label }}:</label>
+                            {{ task_form.finish_date }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12">
+                            <label class="col-form-label">{{ task_form.description.label }}:</label>
+                            {{ task_form.description }}
+                        </div>
+                        {% comment %} <div class="col-6">
+                            <label class="col-form-label">View:</label>
+                            <br>
+                            {{ task_form.markdown_description.value|safe }}
+                        </div> {% endcomment %}
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">     
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
