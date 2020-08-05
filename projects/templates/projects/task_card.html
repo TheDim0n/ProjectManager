@@ -1,25 +1,27 @@
 {% with a=task.id|stringformat:"i" %}
-<li class="list-group-item">
+<li class="list-group-item zero-card">
     <div class="container btn col-12">
         <div class="row">
           <div class="card-text text-left col-4">
             {{task}} <span class="badge badge-pills" style="background-color: {{task.status.color}};">{{task.status}} </span>
           </div>
           <div class="col-8 text-right">
-            <span class="">Finish: {{ level.finish_date }}</span>
+            <span class="">Finish: {{ task.finish_date|date:"d M. Y" }}</span>
+            <span class="icons invisible">
             <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class=" mr-2 ml-2"></svg>
-            <a href="{% url 'projects:task_details' task.pk %}">
-              <svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-pencil text-dark mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <a href="{% url 'tasks:task_details' task.pk %}">
+              <svg width="1.3em" height="1.2em" viewBox="0 0 16 16" class="bi bi-pencil text-dark mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
                 <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
               </svg>
             </a>
             <a data-toggle="modal" data-target={{"#deleteTaskModalP"|add:a}}>
-                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash mr-2 text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg width="1.3em" height="1.2em" viewBox="0 0 16 16" class="bi bi-trash mr-2 text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                   <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                 </svg> 
-            </a> 
+            </a>
+          </span> 
         </div> 
         </div>
       </div>

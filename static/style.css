@@ -5,3 +5,7 @@
     border-left-width: 5px;
     padding-bottom: 5px;
 }
+
+.visible {
+  visibility: visible !important;;
+}
