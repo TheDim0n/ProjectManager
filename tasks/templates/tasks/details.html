@@ -12,6 +12,7 @@
         <div class="lead">
             {{ task.description }}
         </div>
+        <h5>{{task.level}}</h5>
     {% else %}
         <div class="alert alert-danger mr-1"> You don't have permissions for view, change and delete this task! </div>
     {% endif %}
@@ -20,11 +21,9 @@
 {% block actions %}
     {% if  user.pk == task.created_by.pk %}
         <div class="btn-group-vertical btn-block">
-            {% comment %} <a class="btn btn-primary" href="{% url 'tasks:update_task' task.pk %}">Edit</a> {% endcomment %}
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateTaskModal">
                 Edit
             </button>
-            <!-- Button trigger modal -->
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                 Delete
             </button>
