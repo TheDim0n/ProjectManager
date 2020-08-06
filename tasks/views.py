@@ -1,11 +1,25 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
+from markdown import markdown
 
+from projects.models import Project
 from status.models import Status
 from .models import Task
 from .forms import TaskForm, FilterForm
 
+
+def _get_projects(user):
+    projects = [("All", "All"), ('---', '---')]
+    for item in Project.objects.filter(created_by=user):
+        projects.append((item.name, item.name))
+    return projects
+
+def _get_statuses():
+    statuses = [("All", "All")]
+    for item in Status.objects.all():
+        statuses.append((item.text, item.text))
+    return statuses
 
 class TaskListView(ListView):
     model = Task
@@ -24,11 +38,6 @@ class TaskListView(ListView):
         except KeyError:
             status_name = ''
 
-        last_initial = {
-            'status': status_name,
-            'project': project_name,
-        }
-    
         if self.request.user.is_authenticated:
             tasks = Task.objects.filter(created_by=self.request.user)
             if project_name and project_name != "All":
@@ -38,11 +47,21 @@ class TaskListView(ListView):
                     tasks = tasks.filter(level__project__name=project_name)
             if status_name and status_name != "All":
                 tasks = tasks.filter(status__text=status_name)
+
         status_list = Status.objects.all()
+
+        last_initial = {
+            'status': status_name,
+            'project': project_name,
+        }
+        form = FilterForm(initial=last_initial)
+        form.fields['project'].choices = _get_projects(user=self.request.user)
+        form.fields['status'].choices = _get_statuses()
+
         context = super(TaskListView, self).get_context_data(*args, **kwargs)
         context['status_list'] = status_list
         context['tasks'] = tasks
-        context['filter_form'] = FilterForm(initial=last_initial)
+        context['filter_form'] = form
         context['task_form'] = TaskForm
         return context
 
@@ -57,6 +76,7 @@ class TaskDetailView(DetailView):
             'finish_date': self.object.finish_date,
             'status': self.object.status,
             'description': self.object.description,
+            'marked_description': markdown(self.object.description)
         }
         context = super(TaskDetailView, self).get_context_data(*args, **kwargs)
         context['task_form'] = TaskForm(initial=initial_content)

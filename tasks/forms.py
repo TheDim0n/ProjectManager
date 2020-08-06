@@ -1,23 +1,12 @@
 from django import forms
 
-from projects.models import Project
-from status.models import Status
-
 from .models import Task
 
-PROJECTS = [("All", "All"), ('---', '---')]
-for item in Project.objects.all():
-    PROJECTS.append((item.name, item.name))
-
-
-STATUSES = [("All", "All")]
-for item in Status.objects.all():
-    STATUSES.append((item.text, item.text))
 
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['name', 'start_date', 'finish_date', 'status', 'description']
+        fields = ['name', 'start_date', 'finish_date', 'status', 'description', 'marked_description']
 
         widgets = {
             'name': forms.TextInput(attrs={
@@ -36,17 +25,19 @@ class TaskForm(forms.ModelForm):
                 'class': 'form-control form-control-sm',
             }),
             'description': forms.Textarea(attrs={
-                'class': 'form-control',
+                'class': 'form-control no-markdown',
                 'placeholder': 'Enter what to do in this project',
             }),
         }
+        
 
 class FilterForm(forms.Form):
-    project = forms.Field(
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=PROJECTS),
+    project = forms.ChoiceField(
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, ),
         label="Project:",
     )
-    status = forms.Field(
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm'}, choices=STATUSES),
+    status = forms.ChoiceField(
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm'},),
         label="Status:",
     )
+    

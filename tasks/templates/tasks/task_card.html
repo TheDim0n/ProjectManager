@@ -1,4 +1,4 @@
-<a href="{% url 'tasks:task_details'  task.id %}" class="card list-group-item-action shadow">
+<a href="{% url 'tasks:task_details' task.id %}" class="card list-group-item-action shadow">
     <div class="card-header py-0" style="background: {{task.status.color}}; color: {{task.status.text_color}};">
         {{ task.status }}
     </div>
@@ -7,7 +7,7 @@
         {% if task.level.project.name %}
             <p> <b> Project: </b> {{ task.level.project.name }} </p>
         {% endif %}
-        {{ task.markdown_description|striptags|truncatewords:10 }}
+        {{ task.description|striptags|truncatewords:10 }}
     </div>
     <div class="card-footer py-0">
         <div class="row">

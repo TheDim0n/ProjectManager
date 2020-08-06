@@ -7,7 +7,6 @@
                 </div>
                 <div class="modal-body text-left">
                     {% csrf_token %}
-                    {% comment %} {{ task_form.as_p }} {% endcomment %}
                     <div class="form-row">
                         <div class="col-4">
                             <label class="col-form-label">{{ task_form.name.label }}:</label>
@@ -28,16 +27,17 @@
                             {{ task_form.finish_date }}
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-12">
+                    <div class="form-row markdown">
+                        <div class="col-6">
                             <label class="col-form-label">{{ task_form.description.label }}:</label>
                             {{ task_form.description }}
                         </div>
-                        {% comment %} <div class="col-6">
-                            <label class="col-form-label">View:</label>
+                        <div class="col-6">
+                            <label class="col-form-label">Preview:</label>
+                            <a href="{% url 'tasks:task_details' task.id %}">Test</a>
                             <br>
-                            {{ task_form.markdown_description.value|safe }}
-                        </div> {% endcomment %}
+                            <div class="preview-markdown">{{ task_form.marked_description.value|safe }}</div>
+                        </div>
                     </div>
                     
                 </div>

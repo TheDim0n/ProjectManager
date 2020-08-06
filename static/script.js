@@ -12,4 +12,10 @@ $(document).ready(function() {
         function(){
             $(this).find(".icons").addClass("invisible");
         });
+
+    $('.markdown').keyup(function() {
+      var content = $(this).find(".no-markdown").val();
+      var markedContent = marked(content);
+      $(this).find(".preview-markdown").html(markedContent);
+    });
 });
