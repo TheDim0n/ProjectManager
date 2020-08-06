@@ -56,4 +56,7 @@ class Level(models.Model):
         return self.name
     description = models.TextField(max_length=1000, blank=True)
 
+    def get_absolute_url(self):
+        return reverse("projects:level_details", args=[self.id])
+
     objects = LevelManager()

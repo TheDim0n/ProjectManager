@@ -97,6 +97,7 @@ class ProjectListView(ListView):
         context = super(ProjectListView, self).get_context_data(*args, **kwargs)
         context['status_list'] = status_list
         context['projects'] = projects
+        context['project_form'] = ProjectForm
         return context
 
 
@@ -104,12 +105,22 @@ class ProjectDetailView(DetailView):
     model = Project
     template_name = 'projects/details.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, *args, **kwargs):
         # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
+        context = super(ProjectDetailView, self).get_context_data(*args, **kwargs)
         context['zero_level'] = Level.objects.get_zero(self.object)
         context['task_form'] = TaskForm
         context['level_form'] = LevelForm
+        initial_content = {
+            'name': self.object.name,
+            'start_date': self.object.start_date,
+            'finish_date': self.object.finish_date,
+            'status': self.object.status,
+            'description': self.object.description,
+        }
+        context['project_form'] = ProjectForm(initial=initial_content)
+        return context
+
         return context
 
 

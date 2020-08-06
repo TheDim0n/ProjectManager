@@ -4,7 +4,7 @@
     {% if user.pk == project.created_by.pk %}
         <div>
             <h3>
-                {{ project }} <span class="badge" style="background: {{project.status.color}};"> {{ project.status }} </span>
+                {{ project }} <span class="badge" style="background: {{project.status.color}}; color: {{project.status.text_color}};"> {{ project.status }} </span>
             </h3>
             <span class="h5">Start date:</span> {{ project.start_date}}
             <span class="h5"> Finish date:</span> {{ project.finish_date}}
@@ -21,11 +21,14 @@
 {% block actions %}
     {% if user.pk == project.created_by.pk %}
         <div class="btn-group-vertical btn-block">
-            <a class="btn btn-primary" href="{% url 'projects:update_project' project.pk %}">Edit</a>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editProjectModal">
+                Edit
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">
                 Delete
             </button>
         </div>
         {% include "projects/delete_project.html" %}
+        {% include "projects/update_project.html" %}
     {% endif %}
 {% endblock actions %}

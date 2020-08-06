@@ -1,11 +1,19 @@
-{% extends "base.html" %}
-
-{% block body%}
-<form method="POST">
-    <div class="form-group col-4">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Create new project</button>
-    </div>
-</form>
-{% endblock body%}
+<div class="modal fade" id="addProjectModal" tabindex="-1" role="dialog" aria-labelledby="AddTaskModalLabel" aria-hidden="true">
+    <form method="POST" class="needs-validation" novalidate action="{% url 'projects:create_project'%}">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddTaskModalLabel"> Add project </h5>
+                </div>
+                <div class="modal-body text-left">
+                    {% csrf_token %}
+                    {{ project_form.as_p }}
+                </div>
+                <div class="modal-footer">     
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit">Add</button>
+                </div>
+            </div>
+        </div>
+    </form> 
+</div>

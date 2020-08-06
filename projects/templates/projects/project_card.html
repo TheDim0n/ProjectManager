@@ -1,5 +1,5 @@
 <a href="{% url 'projects:project_details'  project.id %}" class="card list-group-item-action shadow">
-    <div class="card-header py-0" style="background: {{project.status.color}};">
+    <div class="card-header py-0" style="background: {{project.status.color}}; color: {{project.status.text_color}};">
         {{ project.status }}
     </div>
     <div class="card-body">

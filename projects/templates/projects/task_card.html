@@ -3,7 +3,7 @@
     <div class="container btn col-12">
         <div class="row">
           <div class="card-text text-left col-4">
-            {{task}} <span class="badge badge-pills" style="background-color: {{task.status.color}};">{{task.status}} </span>
+            {{task}} <span class="badge badge-pills" style="background-color: {{task.status.color}}; color: {{task.status.text_color}};">{{task.status}} </span>
           </div>
           <div class="col-8 text-right">
             <span class="">Finish: {{ task.finish_date|date:"d M. Y" }}</span>
