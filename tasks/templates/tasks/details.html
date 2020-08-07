@@ -3,7 +3,7 @@
 {% block body %}
     {% if  user.pk == task.created_by.pk %}
         <div>
-            <h3>
+            <h3>               
                 {{ task }} 
                 <span class="badge" style="background: {{task.status.color}}; color: {{task.status.text_color}};"> {{ task.status }} </span>
                 {% if task.level.project.name %}

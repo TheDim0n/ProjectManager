@@ -26,6 +26,12 @@ class TaskListView(ListView):
     template_name = 'tasks/index.html'
     ordering = ['finish_date']
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        for obj in queryset:
+            obj.check_expired()
+        return queryset
+
     def get_context_data(self, *args, **kwargs):
         try:
             project_name = self.request.GET['project']
@@ -68,6 +74,11 @@ class TaskDetailView(DetailView):
     model = Task
     template_name = 'tasks/details.html'
 
+    def get_object(self):
+        obj = super().get_object()
+        obj.check_expired()
+        return obj
+
     def get_context_data(self, *args, **kwargs):
         initial_content = {
             'name': self.object.name,
@@ -86,7 +97,6 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskForm
     template_name = 'tasks/index.html'
 
-
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
@@ -96,6 +106,11 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
     template_name = "tasks/update_task.html"
+
+    def form_valid(self, form):
+        self.object.check_expired()
+        return super().form_valid(form)
+
 
 class TaskDeleteView(DeleteView):
     model = Task
