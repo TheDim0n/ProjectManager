@@ -29,17 +29,15 @@
                     </div>
                     <div class="form-row markdown">
                         <div class="col-6">
-                            <label class="col-form-label">{{ task_form.description.label }}:</label>
+                            <label class="col-form-label">{{ task_form.description.label }} (support <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown style</a>):</label>
                             {{ task_form.description }}
                         </div>
                         <div class="col-6">
                             <label class="col-form-label">Preview:</label>
-                            <a href="{% url 'tasks:task_details' task.id %}">Test</a>
                             <br>
-                            <div class="preview-markdown">{{ task_form.marked_description.value|safe }}</div>
+                            <div class="preview-markdown markdown-content">{{ task_form.description.value }}</div>
                         </div>
                     </div>
-                    
                 </div>
                 <div class="modal-footer">     
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

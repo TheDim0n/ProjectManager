@@ -6,7 +6,7 @@ from .models import Task
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['name', 'start_date', 'finish_date', 'status', 'description', 'marked_description']
+        fields = ['name', 'start_date', 'finish_date', 'status', 'description']
 
         widgets = {
             'name': forms.TextInput(attrs={
@@ -29,7 +29,6 @@ class TaskForm(forms.ModelForm):
                 'placeholder': 'Enter what to do in this project',
             }),
         }
-        
 
 class FilterForm(forms.Form):
     project = forms.ChoiceField(

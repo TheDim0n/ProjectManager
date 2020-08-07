@@ -1,7 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
-from markdown import markdown
 
 from projects.models import Project
 from status.models import Status
@@ -76,7 +75,6 @@ class TaskDetailView(DetailView):
             'finish_date': self.object.finish_date,
             'status': self.object.status,
             'description': self.object.description,
-            'marked_description': markdown(self.object.description)
         }
         context = super(TaskDetailView, self).get_context_data(*args, **kwargs)
         context['task_form'] = TaskForm(initial=initial_content)

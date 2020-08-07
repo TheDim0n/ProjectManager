@@ -13,6 +13,12 @@ $(document).ready(function() {
             $(this).find(".icons").addClass("invisible");
         });
 
+    $(".markdown-content").each(function(){
+      var content = $(this).text();
+      var markedContent = marked(content);
+      $(this).html(markedContent);
+    })
+
     $('.markdown').keyup(function() {
       var content = $(this).find(".no-markdown").val();
       var markedContent = marked(content);

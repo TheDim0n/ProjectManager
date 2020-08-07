@@ -7,7 +7,6 @@
         {% if task.level.project.name %}
             <p> <b> Project: </b> {{ task.level.project.name }} </p>
         {% endif %}
-        {{ task.description|striptags|truncatewords:10 }}
     </div>
     <div class="card-footer py-0">
         <div class="row">
