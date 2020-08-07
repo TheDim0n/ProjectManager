@@ -3,15 +3,19 @@
 {% block body %}
     {% if  user.pk == level.created_by.pk %}
         <div>
+           
             <h3>
-                {{ level }} <span class="badge" style="background: {{level.status.color}}; color: {{level.status.text_color}};"> {{ level.status }} </span>
+                {{ level }} <span class="lead">(Level)</span>
+                <span class="badge" style="background: {{level.status.color}}; color: {{level.status.text_color}};"> {{ level.status }} </span>
+                {% if level.project.name %}
+                    <span class="badge badge-secondary"> {{ level.project.name }} </span>
+                {% endif %}
             </h3>
-            <span class="h5">Start date:</span> {{ level.start_date}}
-            <span class="h5"> Finish date:</span> {{ level.finish_date}}
+            <span class="h5">Start date:</span> {{ level.start_date|date:"d M. Y" }}
+            <span class="h5"> Finish date:</span> {{ level.finish_date|date:"d M. Y" }}
         </div>
-        <div class="lead">
-            {{ level.description }}
-        </div>
+        <hr>
+        <div class="markdown-content">{{ level.description }}</div>
     {% else %}
         <div class="alert alert-danger mr-1"> You don't have permissions for view, change and delete this group! </div>
     {% endif %}
@@ -33,4 +37,3 @@
         {% endwith %}
     {% endif %}
 {% endblock actions %}
-"updateTaskModalP"

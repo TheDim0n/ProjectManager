@@ -10,7 +10,7 @@ class ProjectForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter project Title',
+                'placeholder': 'Enter project title',
             }),
             'start_date': forms.DateInput(attrs={
                 'class': 'form-control',
@@ -24,7 +24,7 @@ class ProjectForm(forms.ModelForm):
                 'class': 'form-control',
             }),
             'description': forms.Textarea(attrs={
-                'class': 'form-control',
+                'class': 'form-control no-markdown',
                 'placeholder': 'Enter what to do in this project',
             }),
 
@@ -38,7 +38,7 @@ class LevelForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Enter stage Title',
+                'placeholder': 'Enter stage title',
             }),
             'start_date': forms.DateInput(attrs={
                 'class': 'form-control',
@@ -52,8 +52,8 @@ class LevelForm(forms.ModelForm):
                 'class': 'form-control',
             }),
             'description': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter what to do on this stage',
+                'class': 'form-control no-markdown',
+                'placeholder': 'Enter what to do on this group (stage)',
             }),
 
         }

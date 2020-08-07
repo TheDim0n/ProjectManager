@@ -121,9 +121,6 @@ class ProjectDetailView(DetailView):
         context['project_form'] = ProjectForm(initial=initial_content)
         return context
 
-        return context
-
-
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/users/register'
     model = Project

@@ -6,12 +6,10 @@
             <h3>
                 {{ project }} <span class="badge" style="background: {{project.status.color}}; color: {{project.status.text_color}};"> {{ project.status }} </span>
             </h3>
-            <span class="h5">Start date:</span> {{ project.start_date}}
-            <span class="h5"> Finish date:</span> {{ project.finish_date}}
+            <span class="h5">Start date:</span> {{ project.start_date|date:"d M. Y" }}
+            <span class="h5"> Finish date:</span> {{ project.finish_date|date:"d M. Y" }}
         </div>
-        <div class="lead">
-            {{ project.description }}
-        </div>
+        <div class="markdown-content">{{ project.description }}</div>
         {% include 'projects/zero_level.html' %}
     {% else %}
         <div class="alert alert-danger mr-2"> You don't have permissions for view, change and delete this project! </div>

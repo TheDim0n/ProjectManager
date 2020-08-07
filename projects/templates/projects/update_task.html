@@ -1,13 +1,43 @@
 <div class="modal fade" id="updateTaskModalP" tabindex="-  1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <form method="POST" class="needs-validation" novalidate>
-        <div class="modal-dialog  modal-lg modal-dialog-scrollable">
+        <div class="modal-dialog  modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="deleteModalLabel"> Update {{ task }}</h5>
                 </div>
                 <div class="modal-body text-left">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    <div class="form-row">
+                        <div class="col-4">
+                            <label class="col-form-label">{{ task_form.name.label }}:</label>
+                            {{ task_form.name }}
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">{{ task_form.status.label }}:</label>
+                            {{ task_form.status }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <label class="col-form-label">{{ task_form.start_date.label }}:</label>
+                            {{ task_form.start_date }}
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">{{ task_form.finish_date.label }}:</label>
+                            {{ task_form.finish_date }}
+                        </div>
+                    </div>
+                    <div class="form-row markdown">
+                        <div class="col-6">
+                            <label class="col-form-label">{{ task_form.description.label }} (support <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown style</a>):</label>
+                            {{ task_form.description }}
+                        </div>
+                        <div class="col-6">
+                            <label class="col-form-label">Preview:</label>
+                            <br>
+                            <div class="preview-markdown markdown-content">{{ task_form.description.value }}</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">     
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
