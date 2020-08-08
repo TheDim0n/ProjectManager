@@ -1,5 +1,4 @@
 {% if tasks %}
-    <div class="container">
         <div class="row">
             {% for task in tasks %}
                 <div class="card-group col-4 pl-0 pb-3">
@@ -7,7 +6,6 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
 {% else %}
     <h4>No tasks!</h4>
 {% endif %}
