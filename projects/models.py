@@ -16,7 +16,6 @@ class Project(models.Model):
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
-        default=Status.objects.get_or_create(text="No status")[0].id,
     )
     description = models.TextField(max_length=1000, blank=True)
     created_by = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -46,7 +45,6 @@ class Level(models.Model):
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
-        default=Status.objects.get_or_create(text="No status")[0].id,
     )
     is_zero = models.BooleanField(default=False, blank=True)
     root_level = models.ForeignKey("self", related_name="levels", on_delete=models.CASCADE, null=True)

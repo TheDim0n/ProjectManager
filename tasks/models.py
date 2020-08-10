@@ -16,7 +16,6 @@ class Task(models.Model):
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
-        default=Status.objects.get_or_create(text="No status")[0].id,
     )
     description = models.TextField(max_length=10000, blank=True)
     level = models.ForeignKey(Level, related_name="tasks", on_delete=models.CASCADE, null=True, blank=True)
