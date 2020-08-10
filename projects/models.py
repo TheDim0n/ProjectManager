@@ -29,7 +29,7 @@ class Project(models.Model):
 
 class LevelManager(models.Manager):
     def create_zero_level(self, project_id, user_id):
-        level = self.create(project=project_id, is_zero=True, created_by=user_id)
+        level = self.create(project=project_id, status=project_id.status, is_zero=True, created_by=user_id)
         return level
 
     def get_zero(self, project_id):
