@@ -1,0 +1,34 @@
+[
+    {
+        "model": "status.status", 
+        "pk": 1, 
+        "fields": {
+            "text": "No status", 
+            "color": "#969696"
+        }
+    }, 
+    {
+        "model": "status.status", 
+        "pk": 2, 
+        "fields": {
+            "text": "Done", 
+            "color": "#27b438"
+        }
+    }, 
+    {
+        "model": "status.status", 
+        "pk": 3, 
+        "fields": {
+            "text": "In process", 
+            "color": "#e6ea10"
+        }
+    }, 
+    {
+        "model": "status.status", 
+        "pk": 4, 
+        "fields": {
+            "text": "Expired", 
+            "color": "#8d1616"
+        }
+    }
+]
