@@ -36,11 +36,11 @@
                 {% endif %}
             </div>
             
-            <div class='col-2 navbar-nav justify-content-end border-left border-secondary'>
+            <div class='col-2 navbar-nav justify-content-end border-left border-secondary pr-2'>
                 {% if user.is_authenticated %}
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> {{ user.username }} </a>
-                        <div class="dropdown-menu dropdown-menu-left">
+                        <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{% url 'users:edit_profile' %}">Edit profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'logout' %}">Sign out</a>
