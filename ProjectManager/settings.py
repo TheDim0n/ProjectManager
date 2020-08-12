@@ -37,7 +37,7 @@ SECRET_KEY = 'k-x%k@6w0zqnv%)gz3ag=^*cpqbm&39pv_lhg6swv)w8^kf$a&'
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['thepoject.rtuitlab.ru', 'the-projects', '127.0.0.1']
+ALLOWED_HOSTS = ['theproject.rtuitlab.ru', 'the-projects', '127.0.0.1']
 
 
 # Application definition
