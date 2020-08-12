@@ -11,6 +11,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import environ
+
+env = environ.Env(
+    # set casting, default value
+    DATABASE_HOST=(str, "localhost"),
+    DATABASE_USER=(str, "postgres"),
+    DATABASE_PASSWORD=(str, "password"),
+    DATABASE_DB_NAME=(str, "the_projects")
+)
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +30,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'k-x%k@6w0zqnv%)gz3ag=^*cpqbm&39pv_lhg6swv)w8^kf$a&'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = 'k-x%k@6w0zqnv%)gz3ag=^*cpqbm&39pv_lhg6swv)w8^kf$a&'
+# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = bool(int(os.environ.get("DJANGO_DEBUG")))
+DEBUG = False
 
 ALLOWED_HOSTS = ['the-projects.herokuapp.com', '127.0.0.1']
 
@@ -49,7 +59,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,11 +94,11 @@ WSGI_APPLICATION = 'ProjectManager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'name',
-        'USER': 'user',
-        'PASSWORD': 'passwirs',
-        'HOST': 'localhost',
-        'PORT' : '',
+        'NAME': env('DATABASE_DB_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT' : '5432',
     }
 }
 
@@ -140,8 +149,3 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = 'start_page'
 LOGOUT_REDIRECT_URL = 'start_page'
-
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
