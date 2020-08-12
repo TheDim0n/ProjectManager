@@ -23,8 +23,8 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'RTU IT LAB Docker registry'
-        repository: 'the-projects'
-        command: 'build'
+        repository: 'rtuitlab/the-projects'
+        command: 'buildAndPush'
         Dockerfile: './Dockerfile'
         tags: |
           $(tag)
