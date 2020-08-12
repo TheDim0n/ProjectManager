@@ -44,4 +44,5 @@ stages:
           cd /home/admin/theproject
           docker-compose --no-ansi pull
           docker-compose --no-ansi up -d
+        failOnStdErr: false
         readyTimeout: '20000'
