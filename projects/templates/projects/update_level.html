@@ -1,0 +1,49 @@
+<div class="modal fade" id="updateLevelModalP" tabindex="-  1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <form method="POST" class="needs-validation" novalidate>
+        <div class="modal-dialog  modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel"> Update {{ level }}</h5>
+                </div>
+                <div class="modal-body text-left">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-4">
+                            <label class="col-form-label">{{ form.name.label }}:</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">{{ form.status.label }}:</label>
+                            {{ form.status }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <label class="col-form-label">{{ form.start_date.label }}:</label>
+                            {{ form.start_date }}
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">{{ form.finish_date.label }}:</label>
+                            {{ form.finish_date }}
+                        </div>
+                    </div>
+                    <div class="form-row markdown">
+                        <div class="col-6">
+                            <label class="col-form-label">{{ form.description.label }} (support <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown style</a>):</label>
+                            {{ form.description }}
+                        </div>
+                        <div class="col-6">
+                            <label class="col-form-label">Preview:</label>
+                            <br>
+                            <div class="preview-markdown markdown-content">{{ form.description.value }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">     
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-success" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form> 
+</div>

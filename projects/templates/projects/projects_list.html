@@ -1,0 +1,11 @@
+{% if projects %}
+    <div class="row">
+        {% for project in projects %}
+            <div class="card-group col-4 pl-0 pb-3">
+                {% include "projects/project_card.html" %}
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <h4>No projects!</h4>
+{% endif %}

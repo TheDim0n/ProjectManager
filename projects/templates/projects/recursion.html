@@ -1,0 +1,12 @@
+<div class="border-left border-dark">
+    {% for level in zero_level.levels.all %}
+        {% include "projects/level_card.html" %} 
+    {% endfor %}
+
+
+    <ul class="list-group"> 
+        {% for task in zero_level.tasks.all %}
+            {% include "projects/task_card.html" %} 
+        {% endfor %}
+    </ul>
+</div>

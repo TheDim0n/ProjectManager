@@ -1,0 +1,49 @@
+<div class="modal fade" id="addProjectModal" tabindex="-1" role="dialog" aria-labelledby="AddTaskModalLabel" aria-hidden="true">
+    <form method="POST" class="needs-validation" novalidate action="{% url 'projects:create_project'%}">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddTaskModalLabel"> Add project </h5>
+                </div>
+                <div class="modal-body text-left">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-4">
+                            <label class="col-form-label">{{ project_form.name.label }}:</label>
+                            {{ project_form.name }}
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">{{ project_form.status.label }}:</label>
+                            {{ project_form.status }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-2">
+                            <label class="col-form-label">{{ project_form.start_date.label }}:</label>
+                            {{ project_form.start_date }}
+                        </div>
+                        <div class="col-2">
+                            <label class="col-form-label">{{ project_form.finish_date.label }}:</label>
+                            {{ project_form.finish_date }}
+                        </div>
+                    </div>
+                    <div class="form-row markdown">
+                        <div class="col-6">
+                            <label class="col-form-label">{{ project_form.description.label }} (support <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown style</a>):</label>
+                            {{ project_form.description }}
+                        </div>
+                        <div class="col-6">
+                            <label class="col-form-label">Preview:</label>
+                            <br>
+                            <div class="preview-markdown markdown-content">{{ project_form.description.value }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">     
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit">Add</button>
+                </div>
+            </div>
+        </div>
+    </form> 
+</div>

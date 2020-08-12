@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body %}
+    {% if  user.pk == level.created_by.pk %}
+        <div>
+           
+            <h3>
+                {{ level }} <span class="lead">(Level)</span>
+                <span class="badge" style="background: {{level.status.color}}; color: {{level.status.text_color}};"> {{ level.status }} </span>
+                {% if level.project.name %}
+                    <span class="badge badge-secondary"> {{ level.project.name }} </span>
+                {% endif %}
+            </h3>
+            <span class="h5">Start date:</span> {{ level.start_date|date:"d M. Y" }}
+            <span class="h5"> Finish date:</span> {{ level.finish_date|date:"d M. Y" }}
+        </div>
+        <hr>
+        <div class="markdown-content">{{ level.description }}</div>
+    {% else %}
+        <div class="alert alert-danger mr-1"> You don't have permissions for view, change and delete this group! </div>
+    {% endif %}
+{% endblock body %}
+
+{% block actions %}
+    {% if  user.pk == level.created_by.pk %}
+        <div class="btn-group-vertical btn-block">
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-toggle="modal" data-target="#updateLevelModalP">Edit</button>
+            <!-- Button trigger modal -->
+            {% with a=level.id|stringformat:"i" %}
+            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target={{"#deleteLevelModalP"|add:a}}>
+                Delete
+            </button>
+        </div>
+        <!--deleteModal -->
+        {% include "projects/delete_level.html" %}
+        {% include 'projects/update_level.html' %}
+        {% endwith %}
+    {% endif %}
+{% endblock actions %}

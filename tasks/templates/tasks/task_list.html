@@ -1,0 +1,11 @@
+{% if tasks %}
+        <div class="row">
+            {% for task in tasks %}
+                <div class="card-group col-4 pl-0 pb-3">
+                    {% include "tasks/task_card.html" %}
+                </div>
+            {% endfor %}
+        </div>
+{% else %}
+    <h4>No tasks!</h4>
+{% endif %}

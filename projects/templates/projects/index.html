@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+    {% include 'projects/projects_list.html' %}
+{% endblock body %}
+
+{% block actions %}
+    <div class="btn-group-vertical btn-block">
+        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#addProjectModal"> Add project </button>
+        <div class="btn-group" role="group">
+            <button id="StatusDrop" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Statuses
+            </button>
+            <div class="dropdown-menu" aria-labelledby="StatusDrop">
+                <a class="dropdown-item btn-sm" href="{% url 'projects:index' %}"> All </a>
+                {% for status in status_list %}
+                    <a class="dropdown-item btn-sm" href="{% url 'projects:status_order' status %}"> {{ status }} </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% include 'projects/create_project.html' %}
+{% endblock actions %}

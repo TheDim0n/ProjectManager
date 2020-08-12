@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block body %}
+    {% if user.pk == project.created_by.pk %}
+        <div>
+            <h3>
+                {{ project }} <span class="badge" style="background: {{project.status.color}}; color: {{project.status.text_color}};"> {{ project.status }} </span>
+            </h3>
+            <span class="h5">Start date:</span> {{ project.start_date|date:"d M. Y" }}
+            <span class="h5"> Finish date:</span> {{ project.finish_date|date:"d M. Y" }}
+        </div>
+        <div class="markdown-content">{{ project.description }}</div>
+        {% include 'projects/zero_level.html' %}
+    {% else %}
+        <div class="alert alert-danger mr-2"> You don't have permissions for view, change and delete this project! </div>
+    {% endif %}
+{% endblock body %}
+
+{% block actions %}
+    {% if user.pk == project.created_by.pk %}
+        <div class="btn-group-vertical btn-block">
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editProjectModal">
+                Edit
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">
+                Delete
+            </button>
+        </div>
+        {% include "projects/delete_project.html" %}
+        {% include "projects/update_project.html" %}
+    {% endif %}
+{% endblock actions %}

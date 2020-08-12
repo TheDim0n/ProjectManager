@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}    
+    {% include  'tasks/task_list.html' %}
+{% endblock body %}
+
+{% block actions %}
+    <div class="btn-group-vertical w-100">
+        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#AddTaskModal"> Add task </button>
+    </div>
+    {% include 'tasks/create_task.html' %}
+    <hr>
+    {% include 'tasks/filter_tasks.html' %}
+{% endblock actions %}

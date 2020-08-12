@@ -1,0 +1,15 @@
+<div class="accordion p-3 mr-3 mt-3 border" id="accordionExample">
+    {% with level=zero_level %}
+        {% with a=level.id|stringformat:"i" %}
+            <button type="button" class="btn btn-light btn-sm p-1 m-1" data-toggle="modal" data-target={{"#taskModalP"|add:a}}> <span class="badge badge-success ">+</span> Add task</button>
+            <button type="button" class="btn btn-light btn-sm p-1 m-1" data-toggle="modal" data-target={{"#stageModalP"|add:a}}> <span class="badge badge-success">+</span> Add group</button>
+            {% include "projects/create_level.html" %}
+            {% include 'projects/create_task.html' %}
+            {{level}}
+        {% endwith %}   
+    {% endwith %}
+    
+    {% with current_level=zero_level %}
+        {% include 'projects/recursion.html' %}        
+    {% endwith %}
+</div>
