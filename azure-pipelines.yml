@@ -1,0 +1,31 @@
+trigger:
+- master
+
+name: $(BuildID)-$(Build.SourceBranchName)
+
+pool:
+    vmImage: 'ubuntu-latest'
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'RTU IT LAB Docker registry'
+        repository: 'the-projects'
+        command: 'build'
+        Dockerfile: './Dockerfile'
+        tags: |
+          $(tag)
+          latest
