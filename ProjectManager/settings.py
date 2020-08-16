@@ -12,13 +12,20 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import environ
+from django.utils.crypto import get_random_string
+
+
+def generate_secret_key():
+    chars = 'abcdefghijklmnopqrstuvwxyz01234567890!@#$%^&*()=-+_'
+    return get_random_string(50, chars)
+
 
 env = environ.Env(
     # set casting, default value
     DATABASE_HOST=(str, "localhost"),
     DATABASE_USER=(str, "postgres"),
     DATABASE_PASSWORD=(str, "password"),
-    DATABASE_DB_NAME=(str, "the_projects")
+    DATABASE_DB_NAME=(str, "the_projects"),
 )
 environ.Env.read_env()
 
@@ -30,14 +37,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'k-x%k@6w0zqnv%)gz3ag=^*cpqbm&39pv_lhg6swv)w8^kf$a&'
+SECRET_KEY = generate_secret_key()
 # SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = False
+DEBUG = env.bool("DEBUG", False)
 
-ALLOWED_HOSTS = ['the-projects.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['theproject.rtuitlab.ru', '127.0.0.1']
 
 
 # Application definition
