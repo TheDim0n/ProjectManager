@@ -59,6 +59,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+staticfiles
 # */migrations/
 
 # Flask stuff:
@@ -126,5 +127,3 @@ dmypy.json
 
 # VS Code
 .vscode
-
-.env
