@@ -44,7 +44,7 @@ SECRET_KEY = generate_secret_key()
 # DEBUG = True
 DEBUG = env.bool("DEBUG", False)
 
-ALLOWED_HOSTS = ['theproject.rtuitlab.ru', '127.0.0.1']
+ALLOWED_HOSTS = ['theproject.rtuitlab.ru', '127.0.0.1', 'localhost']
 
 
 # Application definition

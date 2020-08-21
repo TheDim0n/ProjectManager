@@ -83,7 +83,8 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.object.get_absolute_url())
 
 
-class ProjectListView(ListView):
+class ProjectListView(LoginRequiredMixin, ListView):
+    login_url = '/users/register'
     model = Project
     context_object_name = 'projects'
     template_name = 'projects/index.html'
