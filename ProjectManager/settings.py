@@ -42,7 +42,7 @@ SECRET_KEY = generate_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = env.bool("DEBUG", True)
+DEBUG = env.bool("DEBUG", False)
 
 ALLOWED_HOSTS = ['theproject.rtuitlab.ru', '127.0.0.1']
 
