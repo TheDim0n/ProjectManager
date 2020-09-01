@@ -9,6 +9,8 @@ services:
       - postgres_volume:/var/lib/postgresql/data
   the-projects:
     image: rtuitlab/the-projects
+    environment:
+      - DATABASE_HOST=database
     depends_on:
       - database
     ports:

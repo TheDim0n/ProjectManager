@@ -1,0 +1,48 @@
+trigger:
+- master
+
+name: $(BuildID)-$(Build.SourceBranchName)
+
+pool:
+    vmImage: 'ubuntu-latest'
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build and Push
+    steps:
+    - task: Docker@2
+      displayName: Build and Push image
+      inputs:
+        containerRegistry: 'RTU IT LAB Docker registry'
+        repository: 'rtuitlab/the-projects'
+        command: 'buildAndPush'
+        Dockerfile: './Dockerfile'
+        tags: |
+          $(tag)
+          latest
+- stage: Deploy
+  displayName: Deploy service
+  jobs:
+  - job: Deploy_the_projects
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    steps:
+    - task: SSH@0
+      displayName: Restart service
+      inputs:
+        sshEndpoint: 'Situation Center SSH Connection'
+        runOptions: 'inline'
+        inline: |
+          cd /home/admin/theproject
+          docker-compose --no-ansi pull
+          docker-compose --no-ansi up -d
+        failOnStdErr: false
+        readyTimeout: '20000'

@@ -20,7 +20,8 @@ def _get_statuses():
         statuses.append((item.text, item.text))
     return statuses
 
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin, ListView):
+    login_url = '/users/register'
     model = Task
     context_object_name = 'tasks'
     template_name = 'tasks/index.html'
